@@ -11,6 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 
+import { login } from '@/api/auth'
 import { loginSchema, type LoginValues } from './login-schema'
 import { useSession } from './session-context'
 
@@ -32,9 +33,9 @@ export function LoginPage() {
 
   if (session) return <Navigate to="/" replace />
 
-  const onSubmit = (values: LoginValues) => {
-    // Clickable build: any valid email signs in as a super admin.
-    signIn({ name: 'Scout Admin', email: values.email, role: 'super_admin' })
+  const onSubmit = async (values: LoginValues) => {
+    const { admin } = await login(values)
+    signIn({ name: admin.name, email: admin.email, role: admin.role })
     void navigate('/', { replace: true })
   }
 

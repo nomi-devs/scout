@@ -1,9 +1,5 @@
-import { z } from 'zod'
+import { loginRequestSchema, type LoginRequest } from '@/schemas/auth'
 
-/** Error messages are translation keys, resolved in the form. */
-export const loginSchema = z.object({
-  email: z.email({ message: 'login.errors.email' }),
-  password: z.string().min(1, { message: 'login.errors.password' }),
-})
-
-export type LoginValues = z.infer<typeof loginSchema>
+/** The sign-in form validates with the same schema the login request uses. */
+export const loginSchema = loginRequestSchema
+export type LoginValues = LoginRequest

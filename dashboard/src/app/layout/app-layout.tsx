@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from 'react-router'
+import { Navigate, Outlet, useLocation } from 'react-router'
 
 import { Wordmark } from '@/components/brand'
 import { useSession } from '@/features/auth/session-context'
@@ -12,6 +12,7 @@ import { UserMenu } from './user-menu'
 /** Signed-in shell: collapsible side menu (a sheet on phones), top bar with language switch and the admin menu. */
 export function AppLayout() {
   const { session } = useSession()
+  const { pathname } = useLocation()
   if (!session) return <Navigate to="/login" replace />
 
   return (
@@ -30,7 +31,10 @@ export function AppLayout() {
           </div>
         </header>
         <div className="bg-page-wash flex-1 p-4 md:p-6">
-          <Outlet />
+          {/* Keyed by path so each screen eases in. */}
+          <div key={pathname} className="page-enter">
+            <Outlet />
+          </div>
         </div>
       </SidebarInset>
     </SidebarProvider>

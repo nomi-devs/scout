@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest'
 
 import type { AdminSession } from '@/features/auth/session-context'
 import { navItems } from '@/app/nav'
+import { initialUsers } from '@/mock/data'
 import { renderApp } from '@/test/render-app'
 
 const superAdmin: AdminSession = { name: 'Super Admin', email: 'admin@scout.app', role: 'super_admin' }
@@ -97,6 +98,24 @@ describe('clickable dashboard', () => {
     renderApp({ path: '/specializations', session: superAdmin })
     expect(await screen.findByText('Youth development')).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Add specialization' })).toBeInTheDocument()
+  })
+
+  it('shows who deleted an account and that the phone was verified', async () => {
+    const deleted = initialUsers.find((u) => u.status === 'deleted')!
+    renderApp({ path: `/users/${deleted.id}`, session: superAdmin })
+    expect(await screen.findByText(/The user deleted this account from the app/)).toBeInTheDocument()
+    expect(screen.getByText(/^Verified /)).toBeInTheDocument()
+  })
+
+  it('sends a password reset code and records it in the audit log with readable names', async () => {
+    const active = initialUsers.find((u) => u.status === 'active')!
+    const { router } = renderApp({ path: `/users/${active.id}`, session: superAdmin })
+    await userEvent.click(await screen.findByRole('button', { name: 'Send password reset code' }))
+    await userEvent.type(await screen.findByLabelText('Note'), 'User forgot the password')
+    await userEvent.click(await screen.findByRole('button', { name: 'Confirm' }))
+    await router.navigate('/audit')
+    expect(await screen.findByText('User · Password reset sent')).toBeInTheDocument()
+    expect(screen.getAllByText(/Plan · Updated/).length).toBeGreaterThan(0)
   })
 
   it('shows the overview statistics from the SRS', async () => {

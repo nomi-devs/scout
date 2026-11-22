@@ -6,7 +6,11 @@
     "arabic": "العربية",
     "signOut": "Sign out",
     "adminPanel": "Admin panel",
-    "account": "Account"
+    "account": "Account",
+    "signOutTitle": "Log out?",
+    "signOutBody": "Are you sure you want to log out of your account?",
+    "signedOut": "You have been signed out.",
+    "signOutFailed": "Could not sign out. Try again."
   },
   "roles": {
     "super_admin": "Super admin",
@@ -269,7 +273,8 @@
     "adminDetails": "Account details",
     "sportTrainer": "{{sport}} trainer",
     "sportPlayer": "{{sport}} player",
-    "photoCount": "{{count}} photos"
+    "photoCount": "{{count}} photos",
+    "favourites": "Favourites"
   },
   "reports": {
     "description": "Open reports first, oldest on top.",
@@ -318,7 +323,14 @@
     "unsuspend": "Unsuspend user",
     "delete": "Delete user",
     "doneToast": "Done. It is saved in the audit log.",
-    "daysLeft": "{{count}} days left"
+    "daysLeft": "{{count}} days left",
+    "phoneVerified": "Phone verified",
+    "phoneVerifiedOn": "Verified {{date}}",
+    "passwordChanged": "Password changed",
+    "neverChanged": "Never",
+    "deletedByUser": "The user deleted this account from the app on {{date}}. The profile, photos, certificates and subscription history were removed from the app.",
+    "deletedByAdmin": "An admin deleted this account on {{date}}.",
+    "resetPassword": "Send password reset code"
   },
   "txKind": {
     "subscription": "Subscription",
@@ -491,7 +503,47 @@
     "add": "Add admin"
   },
   "audit": {
-    "description": "Every admin action with before and after values."
+    "description": "Every admin action with before and after values.",
+    "verbs": {
+      "login": "Sign in",
+      "logout": "Sign out",
+      "create": "Created",
+      "update": "Updated",
+      "delete": "Deleted",
+      "reorder": "Reordered",
+      "approve": "Approved",
+      "reject": "Rejected",
+      "hide": "Hidden",
+      "unhide": "Unhidden",
+      "extend": "Extended",
+      "remove": "Removed",
+      "featured": "Featured changed",
+      "suspend": "Suspended",
+      "unsuspend": "Unsuspended",
+      "resetPassword": "Password reset sent",
+      "dismiss": "Dismissed"
+    },
+    "areas": {
+      "auth": "Account",
+      "banner": "Banner",
+      "featured": "Featured",
+      "plan": "Plan",
+      "profile": "Profile",
+      "settings": "Settings",
+      "user": "User",
+      "report": "Report",
+      "reel": "Reel",
+      "sport": "Sport",
+      "nationality": "Nationality",
+      "specialization": "Specialization",
+      "onboarding": "Onboarding",
+      "coupon": "Coupon",
+      "cms": "CMS page",
+      "faq": "FAQ",
+      "list": "List",
+      "broadcast": "Broadcast",
+      "admin": "Admin"
+    }
   },
   "table": {
     "showing": "Showing {{from}}–{{to}} of {{total}}",
@@ -517,17 +569,18 @@
     "allAges": "All ages",
     "allExperience": "Any experience",
     "age": {
-      "u18": "Under 18",
       "18-25": "18 – 25",
       "26-35": "26 – 35",
-      "36+": "36 and over"
+      "36-45": "36 – 45",
+      "46-60": "46 – 60",
+      "60+": "Over 60"
     },
     "exp": {
-      "0-2": "0 – 2 years",
-      "3-5": "3 – 5 years",
-      "6-10": "6 – 10 years",
-      "10+": "Over 10 years"
-    }
+      "0-1": "Under 1 year",
+      "1-5": "1 – 5 years",
+      "5+": "Over 5 years"
+    },
+    "allGenders": "All genders"
   },
   "reels": {
     "description": "Videos users upload from Create Reel. Review each one before it is published.",
@@ -586,5 +639,10 @@
     "undo": "Undo",
     "redo": "Redo",
     "linkPrompt": "Link address (leave empty to remove)"
+  },
+  "error": {
+    "title": "Something went wrong",
+    "body": "This screen could not load. Your changes so far are saved. Try again, or go back to the overview.",
+    "retry": "Try again"
   }
 }

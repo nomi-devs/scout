@@ -1,9 +1,23 @@
 import { ChevronDown, LogOut, Mail, ShieldCheck } from 'lucide-react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router'
+import { toast } from 'sonner'
+
+import { logout } from '@/api/auth'
+import { useMockStore } from '@/mock/store'
 
 import { useSession } from '@/features/auth/session-context'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,7 +32,25 @@ import {
 export function UserMenu() {
   const { t } = useTranslation()
   const { session, signOut } = useSession()
+  const { logAudit } = useMockStore()
+  const navigate = useNavigate()
+  const [confirmOpen, setConfirmOpen] = useState(false)
+  const [busy, setBusy] = useState(false)
   if (!session) return null
+
+  async function confirmLogout() {
+    setBusy(true)
+    try {
+      await logout()
+      logAudit({ admin: session!.name, action: 'auth.logout', target: session!.email, before: 'signed in', after: 'signed out' })
+      signOut()
+      toast.success(t('app.signedOut'))
+      void navigate('/login', { replace: true })
+    } catch {
+      toast.error(t('app.signOutFailed'))
+      setBusy(false)
+    }
+  }
   const initials = session.name
     .split(' ')
     .map((w) => w[0])
@@ -61,11 +93,27 @@ export function UserMenu() {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem variant="destructive" onSelect={signOut}>
+        <DropdownMenuItem variant="destructive" onSelect={() => setConfirmOpen(true)}>
           <LogOut />
           {t('app.signOut')}
         </DropdownMenuItem>
       </DropdownMenuContent>
+      <Dialog open={confirmOpen} onOpenChange={(open) => !busy && setConfirmOpen(open)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{t('app.signOutTitle')}</DialogTitle>
+            <DialogDescription>{t('app.signOutBody')}</DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" disabled={busy} onClick={() => setConfirmOpen(false)}>
+              {t('common.cancel')}
+            </Button>
+            <Button variant="destructive" disabled={busy} onClick={() => void confirmLogout()}>
+              {t('app.signOut')}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </DropdownMenu>
   )
 }

@@ -39,3 +39,5 @@ The current build is the **clickable build on mock data** (no API yet): mock log
 **Reel rules (from the dev note):** a user can upload at most 35 reels per month, each reel is at most 2 minutes long, and approved reels stay in the app with no expiry. The limits are constants (`REEL_MAX_PER_MONTH`, `REEL_MAX_SECONDS`) in `src/mock/data.ts`. The reel review screen shows the owner's uploads this month against the limit, and Settings states the rules. The backend must enforce the limits on upload, because the dashboard only displays them.
 
 **Source of truth:** the approved mobile design (`Scout.pdf`), then the SRS. Plan names and prices (6 months 36 KWD, 1 year 60 KWD, Featured 1 month 5 KWD, 3 months 20 KWD), payment methods (KNET, Apple Pay, Visa, MasterCard via MyFatoorah), coupon behaviour and the Contact Us texts follow the app.
+
+Mismatches between the mobile design and the rules the dashboard follows are listed in [docs/design-corrections.md](docs/design-corrections.md).

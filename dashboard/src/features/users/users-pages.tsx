@@ -1,4 +1,4 @@
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, BadgeCheck } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigate, useParams } from 'react-router'
@@ -31,6 +31,16 @@ export function UsersPage() {
       cell: (u) => <span className="font-medium">{u.name}</span>,
     },
     { key: 'email', header: t('col.email'), cell: (u) => u.email },
+    {
+      key: 'phone',
+      header: t('col.phone'),
+      cell: (u) => (
+        <span className="inline-flex items-center gap-1">
+          {u.phone}
+          {u.phoneVerifiedAt && <BadgeCheck className="text-primary size-4" aria-label={t('users.phoneVerified')} />}
+        </span>
+      ),
+    },
     { key: 'role', header: t('col.type'), cell: (u) => t(`userRole.${u.role}`) },
     {
       key: 'joined',
@@ -75,7 +85,7 @@ export function UsersPage() {
   )
 }
 
-type Action = 'suspend' | 'unsuspend' | 'delete' | 'extend'
+type Action = 'suspend' | 'unsuspend' | 'delete' | 'extend' | 'resetPassword'
 
 export function UserDetailPage() {
   const { t, i18n } = useTranslation()
@@ -96,7 +106,15 @@ export function UserDetailPage() {
 
   function apply(a: Action, note: string) {
     if (!user || !profile) return
-    if (a === 'extend') {
+    if (a === 'resetPassword') {
+      logAudit({
+        admin: '',
+        action: 'user.resetPassword',
+        target: user.name,
+        before: '—',
+        after: `${user.phone}: ${note}`,
+      })
+    } else if (a === 'extend') {
       const base = Math.max(user.subscriptionEndsAt ?? Date.now(), Date.now())
       updateUser(user.id, { subscriptionEndsAt: base + days * 86_400_000 })
       logAudit({
@@ -108,7 +126,7 @@ export function UserDetailPage() {
       })
     } else {
       const status = a === 'delete' ? 'deleted' : a === 'suspend' ? 'suspended' : 'active'
-      updateUser(user.id, { status })
+      updateUser(user.id, { status, ...(a === 'delete' ? { deletion: { at: Date.now(), by: 'admin' as const } } : {}) })
       if (a !== 'unsuspend') updateProfile(profile.id, { status: 'hidden' })
       logAudit({ admin: '', action: `user.${a}`, target: user.name, before: user.status, after: `${status}: ${note}` })
     }
@@ -147,21 +165,40 @@ export function UserDetailPage() {
             <CardTitle>{t('users.history')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3 text-sm">
+            {user.deletion && (
+              <p className="bg-muted rounded-md p-3">
+                {t(user.deletion.by === 'user' ? 'users.deletedByUser' : 'users.deletedByAdmin', {
+                  date: formatDate(user.deletion.at, i18n.language),
+                })}
+              </p>
+            )}
             <p>
-              {t('col.phone')}: {user.phone} · {t('col.joined')}: {formatDate(user.joinedAt, i18n.language)}
+              {t('col.phone')}: {user.phone}{' '}
+              <StatusBadge tone="success">
+                {t('users.phoneVerifiedOn', { date: formatDate(user.phoneVerifiedAt, i18n.language) })}
+              </StatusBadge>
             </p>
             <p>
-              {t('users.subscription')}:{' '}
-              {user.subscriptionEndsAt
-                ? `${user.subscriptionPlan ? `${t(`subscriptions.plan.${user.subscriptionPlan}`)} · ` : ''}${
-                    user.subscriptionStartedAt ? `${formatDate(user.subscriptionStartedAt, i18n.language)} → ` : ''
-                  }${formatDate(user.subscriptionEndsAt, i18n.language)} (${t('users.daysLeft', { count: daysLeft(user.subscriptionEndsAt) })})`
-                : t('users.noSubscription')}
+              {t('col.joined')}: {formatDate(user.joinedAt, i18n.language)} · {t('users.passwordChanged')}:{' '}
+              {user.passwordChangedAt ? formatDate(user.passwordChangedAt, i18n.language) : t('users.neverChanged')}
             </p>
-            <p>
-              {t('users.featured')}: {featured ? formatDate(profile.featuredUntil ?? 0, i18n.language) : t('common.no')}{' '}
-              · {t('users.blocks')}: {user.blocks}
-            </p>
+            {user.status !== 'deleted' && (
+              <>
+                <p>
+                  {t('users.subscription')}:{' '}
+                  {user.subscriptionEndsAt
+                    ? `${user.subscriptionPlan ? `${t(`subscriptions.plan.${user.subscriptionPlan}`)} · ` : ''}${
+                        user.subscriptionStartedAt ? `${formatDate(user.subscriptionStartedAt, i18n.language)} → ` : ''
+                      }${formatDate(user.subscriptionEndsAt, i18n.language)} (${t('users.daysLeft', { count: daysLeft(user.subscriptionEndsAt) })})`
+                    : t('users.noSubscription')}
+                </p>
+                <p>
+                  {t('users.featured')}:{' '}
+                  {featured ? formatDate(profile.featuredUntil ?? 0, i18n.language) : t('common.no')} ·{' '}
+                  {t('users.blocks')}: {user.blocks}
+                </p>
+              </>
+            )}
             <Button asChild variant="outline" size="sm">
               <Link to={`/${profile.role}s/${profile.id}`}>{t('users.viewProfile')}</Link>
             </Button>
@@ -200,6 +237,13 @@ export function UserDetailPage() {
               onClick={() => setAction('extend')}
             >
               {t('users.extend')}
+            </Button>
+            <Button
+              variant="outline"
+              disabled={!canAct || user.status === 'deleted'}
+              onClick={() => setAction('resetPassword')}
+            >
+              {t('users.resetPassword')}
             </Button>
             <Button variant="outline" disabled={!canAct || user.status === 'deleted'} onClick={toggleFeatured}>
               {featured ? t('users.featuredOff') : t('users.featuredOn')}

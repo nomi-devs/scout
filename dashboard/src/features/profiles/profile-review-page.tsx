@@ -260,9 +260,10 @@ export function ProfileReviewPage() {
                 <Info label={t('review.gender')} value={t(`review.genders.${p.gender}`)} />
                 <Info label={t('col.location')} value={p.location} />
                 <Info label={t('review.submitted')} value={formatDate(p.submittedAt, i18n.language)} />
-                {p.role === 'player' && <Info label={t('review.weight')} value={`${p.weightKg} kg`} />}
-                {p.role === 'player' && <Info label={t('review.height')} value={`${p.heightCm} cm`} />}
+                {p.role === 'player' && <Info label={t('review.weight')} value={p.weightKg ? `${p.weightKg} kg` : '—'} />}
+                {p.role === 'player' && <Info label={t('review.height')} value={p.heightCm ? `${p.heightCm} cm` : '—'} />}
                 <Info label={t('review.views')} value={p.views.toLocaleString(i18n.language)} />
+                <Info label={t('review.favourites')} value={(p.favourites ?? 0).toLocaleString(i18n.language)} />
                 <Info label={t('review.contactConsent')} value={p.contactConsent ? t('common.yes') : t('common.no')} />
                 <Info label={t('review.phone')} value={p.phone} />
                 <Info label={t('review.email')} value={p.email} />

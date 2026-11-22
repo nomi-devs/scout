@@ -34,6 +34,8 @@ export interface ProfileRec {
   status: ProfileStatus
   submittedAt: number
   views: number
+  /** How many users saved this profile in the app's Favourites. */
+  favourites?: number
   featuredUntil?: number
   lockedBy?: string
   rejectionReasons?: string[]
@@ -412,7 +414,8 @@ function generateProfiles(count: number): ProfileRec[] {
 initialProfiles.push(...generateProfiles(130))
 for (const p of initialProfiles) {
   p.dob = NOW - p.age * 365.25 * D - ((p.userId.length * 37) % 300) * D
-  if (p.role === 'trainer') p.approach = 'Strong fundamentals, individual attention and a genuine love of the game.'
+  p.favourites = Math.round(p.views / 12)
+  p.approach = 'Strong fundamentals, individual attention and a genuine love of the game.'
 }
 
 export interface UserRec {
@@ -428,6 +431,12 @@ export interface UserRec {
   subscriptionStartedAt?: number
   subscriptionEndsAt?: number
   blocks: number
+  /** When the sign-up OTP was confirmed. The app needs a verified phone before anything else. */
+  phoneVerifiedAt: number
+  /** Last time the user changed their password (app: Account > Change Password). */
+  passwordChangedAt?: number
+  /** Set when the account is deleted, by the user (app: Delete Account) or by an admin. */
+  deletion?: { at: number; by: 'user' | 'admin' }
 }
 
 const planMonths = { '6m': 6, '12m': 12 } as const
@@ -438,19 +447,26 @@ export const initialUsers: UserRec[] = initialProfiles.map((p, i) => {
   const elapsed = (i * 53) % length
   const hasPlan = p.status === 'approved' || p.status === 'hidden'
   const endsAt = p.status === 'approved' ? daysAhead(length - elapsed) : daysAgo((i % 30) + 1)
+  const joinedAt = daysAgo(5 + ((i * 37) % 300))
+  // A few accounts were deleted by their owner from the app. Their profile is gone from the app.
+  const deletedByUser = i % 31 === 7
+  if (deletedByUser) p.status = 'hidden'
   return {
     id: p.userId,
     name: p.name,
     email: p.email,
     phone: p.phone,
     role: p.role,
-    status: p.status === 'hidden' && i % 4 === 0 ? 'suspended' : 'active',
-    joinedAt: daysAgo(5 + ((i * 37) % 300)),
+    status: deletedByUser ? 'deleted' : p.status === 'hidden' && i % 4 === 0 ? 'suspended' : 'active',
+    joinedAt,
     profileId: p.id,
     ...(hasPlan
       ? { subscriptionPlan: plan, subscriptionStartedAt: endsAt - length * D, subscriptionEndsAt: endsAt }
       : {}),
     blocks: i % 3,
+    phoneVerifiedAt: joinedAt + 4 * 60_000,
+    ...(i % 5 === 0 ? { passwordChangedAt: daysAgo((i % 60) + 1) } : {}),
+    ...(deletedByUser ? { deletion: { at: daysAgo(1 + (i % 20)), by: 'user' as const } } : {}),
   }
 })
 

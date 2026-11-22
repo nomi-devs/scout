@@ -28,6 +28,7 @@ import { UserDetailPage, UsersPage } from '@/features/users/users-pages'
 
 import { AppLayout } from './layout/app-layout'
 import { NotFoundPage } from './not-found-page'
+import { RouteError } from './route-error'
 import { RequireRole } from './require-role'
 
 /** A route whose first segment is a nav section the role must be allowed to see. */
@@ -38,10 +39,11 @@ const guard = (path: string, element: ReactNode) => ({
 
 /** Every nav section has a clickable screen on mock data. */
 export const routes: RouteObject[] = [
-  { path: '/login', element: <LoginPage /> },
+  { path: '/login', element: <LoginPage />, errorElement: <RouteError /> },
   {
     path: '/',
     element: <AppLayout />,
+    errorElement: <RouteError />,
     children: [
       { index: true, element: <OverviewPage /> },
       guard('players', <ProfilesQueuePage role="player" />),

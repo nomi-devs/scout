@@ -6,6 +6,7 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
+  Inbox,
   Search,
   X,
 } from 'lucide-react'
@@ -225,8 +226,11 @@ export function DataTable<T>({
             <TableBody>
               {pageRows.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={columns.length} className="text-muted-foreground h-24 text-center">
-                    {t('common.empty')}
+                  <TableCell colSpan={columns.length} className="text-muted-foreground h-32 text-center">
+                    <span className="flex flex-col items-center gap-2">
+                      <Inbox className="size-6 opacity-60" aria-hidden />
+                      {t('common.empty')}
+                    </span>
                   </TableCell>
                 </TableRow>
               )}

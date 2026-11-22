@@ -14,18 +14,18 @@ import { isPending, ProfileStatusBadge } from './profile-status'
 
 const sports = ['football', 'basketball', 'volleyball', 'tennis', 'cricket']
 
-/** Age and experience are filtered in bands, as in the app's filter sheet. */
+/** Age and experience are filtered in the same ranges as the app's Filters screen (age 18 to 60+, experience 1 to 5+ years). */
 const ageBands = [
-  { key: 'u18', test: (n: number) => n < 18 },
-  { key: '18-25', test: (n: number) => n >= 18 && n <= 25 },
+  { key: '18-25', test: (n: number) => n < 26 },
   { key: '26-35', test: (n: number) => n >= 26 && n <= 35 },
-  { key: '36+', test: (n: number) => n >= 36 },
+  { key: '36-45', test: (n: number) => n >= 36 && n <= 45 },
+  { key: '46-60', test: (n: number) => n >= 46 && n <= 60 },
+  { key: '60+', test: (n: number) => n > 60 },
 ]
 const expBands = [
-  { key: '0-2', test: (n: number) => n <= 2 },
-  { key: '3-5', test: (n: number) => n >= 3 && n <= 5 },
-  { key: '6-10', test: (n: number) => n >= 6 && n <= 10 },
-  { key: '10+', test: (n: number) => n > 10 },
+  { key: '0-1', test: (n: number) => n < 1 },
+  { key: '1-5', test: (n: number) => n >= 1 && n <= 5 },
+  { key: '5+', test: (n: number) => n > 5 },
 ]
 const bandOf = (bands: typeof ageBands, n: number) => bands.find((b) => b.test(n))?.key ?? ''
 
@@ -124,6 +124,12 @@ export function ProfilesQueuePage({ role }: { role: ProfileRole }) {
             label: t('filters.allSpecializations'),
             options: unique(roleProfiles.map((p) => p.specialization)),
             value: (p) => p.specialization,
+          },
+          {
+            key: 'gender',
+            label: t('filters.allGenders'),
+            options: (['Male', 'Female'] as const).map((g) => ({ value: g, label: t(`review.genders.${g}`) })),
+            value: (p) => p.gender,
           },
           {
             key: 'age',
