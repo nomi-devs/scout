@@ -126,7 +126,7 @@ export function DataTable<T>({
   }
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       {(searchText || filters.length > 0 || toolbar) && (
         <div className="flex flex-wrap items-center gap-2">
           {searchText && (
@@ -251,7 +251,7 @@ export function DataTable<T>({
           </Table>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-3 border-t px-4 py-3 text-sm">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t px-3 py-2 text-sm">
           <p className="text-muted-foreground">
             {t('table.showing', {
               from: visible.length ? start + 1 : 0,

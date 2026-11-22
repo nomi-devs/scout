@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 
@@ -8,18 +8,21 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { REEL_MAX_PER_MONTH, REEL_MAX_SECONDS } from '@/mock/data'
 import { useMockStore } from '@/mock/store'
 
-type TextKey = 'supportEmail' | 'emailAvailability' | 'phone' | 'phoneAvailability' | 'minIos' | 'minAndroid'
+import { ChangePasswordCard } from './change-password-card'
+import { ForceUpdateCard } from './force-update-card'
+
+type TextKey = 'supportEmail' | 'emailAvailability' | 'phone' | 'phoneAvailability'
 type FlagKey = 'featuredEnabled' | 'reelsEnabled' | 'guestBrowsing'
 
-/** Global config the app reads on launch (A11): payment provider, feature flags, support contacts. */
+/** Global config the app reads on launch (A11): feature flags, support contacts. */
 export function SettingsPage() {
   const { t } = useTranslation()
   const { logAudit } = useMockStore()
   const [s, setS] = useState({
-    provider: 'myfatoorah',
     featuredEnabled: true,
     reelsEnabled: true,
     guestBrowsing: true,
@@ -27,8 +30,6 @@ export function SettingsPage() {
     emailAvailability: 'Response within 2 hrs',
     phone: '+965 1234 5678',
     phoneAvailability: 'Available 24/7',
-    minIos: '1.0.0',
-    minAndroid: '1.0.0',
   })
   const set = (patch: Partial<typeof s>) => setS((cur) => ({ ...cur, ...patch }))
 
@@ -45,61 +46,69 @@ export function SettingsPage() {
     </div>
   )
 
+  const save = (e: FormEvent) => {
+    e.preventDefault()
+    logAudit({ admin: '', action: 'settings.update', target: t('nav.settings'), before: '—', after: '—' })
+    toast.success(t('common.saved'))
+  }
+  const saveButton = (
+    <div>
+      <Button type="submit">{t('common.save')}</Button>
+    </div>
+  )
+
   return (
     <section>
       <PageHeader title={t('nav.settings')} description={t('settings.description')} />
-      <form
-        className="grid gap-4 lg:grid-cols-2"
-        onSubmit={(e) => {
-          e.preventDefault()
-          logAudit({ admin: '', action: 'settings.update', target: t('nav.settings'), before: '—', after: s.provider })
-          toast.success(t('common.saved'))
-        }}
-      >
-        <Card>
-          <CardHeader>
-            <CardTitle>{t('settings.payments')}</CardTitle>
-            <CardDescription>{t('settings.paymentsHint')}</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-1">
-              <Label>{t('settings.provider')}</Label>
-              <Input value="MyFatoorah" readOnly aria-label={t('settings.provider')} />
-              <p className="text-muted-foreground text-xs">{t('settings.methods')}</p>
-            </div>
-            {flag('featuredEnabled', t('settings.featuredEnabled'))}
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>{t('settings.features')}</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {flag('reelsEnabled', t('settings.reelsEnabled'))}
-            <p className="text-muted-foreground text-xs">
-              {t('settings.reelRules', { perMonth: REEL_MAX_PER_MONTH, minutes: REEL_MAX_SECONDS / 60 })}
-            </p>
-            {flag('guestBrowsing', t('settings.guestBrowsing'))}
-            {text('minIos', t('settings.minIos'))}
-            {text('minAndroid', t('settings.minAndroid'))}
-          </CardContent>
-        </Card>
-        <Card className="lg:col-span-2">
-          <CardHeader>
-            <CardTitle>{t('settings.contact')}</CardTitle>
-            <CardDescription>{t('settings.contactHint')}</CardDescription>
-          </CardHeader>
-          <CardContent className="grid gap-4 md:grid-cols-2">
-            {text('supportEmail', t('settings.supportEmail'))}
-            {text('emailAvailability', t('settings.emailAvailability'))}
-            {text('phone', t('settings.phone'))}
-            {text('phoneAvailability', t('settings.phoneAvailability'))}
-          </CardContent>
-        </Card>
-        <div>
-          <Button type="submit">{t('common.save')}</Button>
-        </div>
-      </form>
+      <Tabs defaultValue="features">
+        <TabsList>
+          <TabsTrigger value="features">{t('settings.features')}</TabsTrigger>
+          <TabsTrigger value="contact">{t('settings.contact')}</TabsTrigger>
+          <TabsTrigger value="version">{t('settings.version')}</TabsTrigger>
+          <TabsTrigger value="security">{t('settings.security')}</TabsTrigger>
+        </TabsList>
+        <TabsContent value="features">
+          <form onSubmit={save} className="max-w-2xl space-y-3">
+            <Card>
+              <CardHeader>
+                <CardTitle>{t('settings.features')}</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {flag('featuredEnabled', t('settings.featuredEnabled'))}
+                {flag('reelsEnabled', t('settings.reelsEnabled'))}
+                <p className="text-muted-foreground text-xs">
+                  {t('settings.reelRules', { perMonth: REEL_MAX_PER_MONTH, minutes: REEL_MAX_SECONDS / 60 })}
+                </p>
+                {flag('guestBrowsing', t('settings.guestBrowsing'))}
+              </CardContent>
+            </Card>
+            {saveButton}
+          </form>
+        </TabsContent>
+        <TabsContent value="contact">
+          <form onSubmit={save} className="max-w-3xl space-y-3">
+            <Card>
+              <CardHeader>
+                <CardTitle>{t('settings.contact')}</CardTitle>
+                <CardDescription>{t('settings.contactHint')}</CardDescription>
+              </CardHeader>
+              <CardContent className="grid gap-4 md:grid-cols-2">
+                {text('supportEmail', t('settings.supportEmail'))}
+                {text('emailAvailability', t('settings.emailAvailability'))}
+                {text('phone', t('settings.phone'))}
+                {text('phoneAvailability', t('settings.phoneAvailability'))}
+              </CardContent>
+            </Card>
+            {saveButton}
+          </form>
+        </TabsContent>
+        <TabsContent value="version">
+          <ForceUpdateCard />
+        </TabsContent>
+        <TabsContent value="security" className="max-w-xl">
+          <ChangePasswordCard />
+        </TabsContent>
+      </Tabs>
     </section>
   )
 }

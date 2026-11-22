@@ -33,3 +33,21 @@ export type LoginResponse = z.infer<typeof loginResponseSchema>
 /** POST /admin/auth/logout. Revokes the refresh token and clears its cookie. No body needed. */
 export const logoutResponseSchema = z.object({ ok: z.literal(true) })
 export type LogoutResponse = z.infer<typeof logoutResponseSchema>
+
+/** POST /admin/auth/change-password. The server checks the current password; the page checks the new one. */
+export const changePasswordRequestSchema = z
+  .object({
+    currentPassword: z.string().min(1, { message: 'password.errors.current' }),
+    newPassword: z
+      .string()
+      .min(8, { message: 'password.errors.min' })
+      .regex(/[A-Za-z]/, { message: 'password.errors.letter' })
+      .regex(/\d/, { message: 'password.errors.digit' }),
+    confirmPassword: z.string().min(1, { message: 'password.errors.confirm' }),
+  })
+  .refine((v) => v.newPassword === v.confirmPassword, { message: 'password.errors.match', path: ['confirmPassword'] })
+  .refine((v) => v.newPassword !== v.currentPassword, { message: 'password.errors.same', path: ['newPassword'] })
+export type ChangePasswordRequest = z.infer<typeof changePasswordRequestSchema>
+
+export const changePasswordResponseSchema = z.object({ ok: z.literal(true), changedAt: z.iso.datetime() })
+export type ChangePasswordResponse = z.infer<typeof changePasswordResponseSchema>

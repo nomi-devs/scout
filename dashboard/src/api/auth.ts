@@ -2,6 +2,10 @@ import {
   loginRequestSchema,
   loginResponseSchema,
   logoutResponseSchema,
+  changePasswordRequestSchema,
+  changePasswordResponseSchema,
+  type ChangePasswordRequest,
+  type ChangePasswordResponse,
   type LoginRequest,
   type LoginResponse,
   type LogoutResponse,
@@ -28,4 +32,11 @@ export async function login(input: LoginRequest): Promise<LoginResponse> {
 export async function logout(): Promise<LogoutResponse> {
   await latency()
   return logoutResponseSchema.parse({ ok: true })
+}
+
+/** Mock of POST /admin/auth/change-password. The real server rejects a wrong current password with 400. */
+export async function changePassword(input: ChangePasswordRequest): Promise<ChangePasswordResponse> {
+  changePasswordRequestSchema.parse(input)
+  await latency()
+  return changePasswordResponseSchema.parse({ ok: true, changedAt: new Date().toISOString() })
 }

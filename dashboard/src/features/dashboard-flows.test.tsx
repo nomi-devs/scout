@@ -118,6 +118,43 @@ describe('clickable dashboard', () => {
     expect(screen.getAllByText(/Plan · Updated/).length).toBeGreaterThan(0)
   })
 
+  it('changes the admin password from settings and records it', async () => {
+    const { router } = renderApp({ path: '/settings', session: superAdmin })
+    expect(screen.queryByText('Payment provider')).not.toBeInTheDocument()
+    await userEvent.click(await screen.findByRole('tab', { name: 'Security' }))
+    await userEvent.type(await screen.findByLabelText('Current password'), 'old-pass-1')
+    await userEvent.type(screen.getByLabelText('New password'), 'short')
+    await userEvent.type(screen.getByLabelText('Confirm new password'), 'short')
+    await userEvent.click(screen.getByRole('button', { name: 'Change password' }))
+    expect(await screen.findByText('Use at least 8 characters.')).toBeInTheDocument()
+    await userEvent.clear(screen.getByLabelText('New password'))
+    await userEvent.clear(screen.getByLabelText('Confirm new password'))
+    await userEvent.type(screen.getByLabelText('New password'), 'new-pass-22')
+    await userEvent.type(screen.getByLabelText('Confirm new password'), 'new-pass-23')
+    await userEvent.click(screen.getByRole('button', { name: 'Change password' }))
+    expect(await screen.findByText('The passwords do not match.')).toBeInTheDocument()
+    await userEvent.clear(screen.getByLabelText('Confirm new password'))
+    await userEvent.type(screen.getByLabelText('Confirm new password'), 'new-pass-22')
+    await userEvent.click(screen.getByRole('button', { name: 'Change password' }))
+    await waitFor(() => expect(screen.getByLabelText('Current password')).toHaveValue(''))
+    await router.navigate('/audit')
+    expect(await screen.findByText('Account · Password changed')).toBeInTheDocument()
+  })
+
+  it('only enables force update when both platforms have a valid version and store link', async () => {
+    renderApp({ path: '/settings', session: superAdmin })
+    await userEvent.click(await screen.findByRole('tab', { name: 'App version' }))
+    expect(screen.getByText(/nobody is blocked/)).toBeInTheDocument()
+    await userEvent.clear(screen.getByLabelText('Latest version', { selector: '#androidVersion' }))
+    await userEvent.type(screen.getByLabelText('Latest version', { selector: '#androidVersion' }), 'v2')
+    await userEvent.click(screen.getByRole('switch', { name: 'App Version & Force Update' }))
+    expect(await screen.findByText('Use the format 1.2.3 or 1.2.3+6.')).toBeInTheDocument()
+    await userEvent.clear(screen.getByLabelText('Latest version', { selector: '#androidVersion' }))
+    await userEvent.type(screen.getByLabelText('Latest version', { selector: '#androidVersion' }), '2.0.0+1')
+    await waitFor(() => expect(screen.queryByText('Use the format 1.2.3 or 1.2.3+6.')).not.toBeInTheDocument())
+    expect(screen.getByText(/users on an older version are blocked until they update\./i, { selector: 'p' })).toBeInTheDocument()
+  })
+
   it('shows the overview statistics from the SRS', async () => {
     renderApp({ path: '/', session: superAdmin })
     for (const label of [

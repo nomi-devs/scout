@@ -36,12 +36,12 @@ function Stat({
       className={`h-full border-0 shadow-sm transition duration-200 ${to ? 'hover:-translate-y-0.5 hover:shadow-md active:translate-y-0' : ''}`}
     >
       <CardContent className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-4">
-        <span className={`flex size-10 shrink-0 items-center justify-center rounded-xl sm:size-12 ${tones[tone]}`}>
+        <span className={`flex size-10 shrink-0 items-center justify-center rounded-xl sm:size-11 ${tones[tone]}`}>
           <Icon className="size-5 sm:size-6" />
         </span>
         <div>
           <p className="text-muted-foreground text-xs sm:text-sm">{label}</p>
-          <p className="font-heading text-2xl font-bold sm:text-3xl">{value}</p>
+          <p className="font-heading text-2xl font-bold sm:text-2xl">{value}</p>
         </div>
       </CardContent>
     </Card>
@@ -75,7 +75,7 @@ export function OverviewPage() {
   return (
     <section>
       <PageHeader title={t('nav.overview')} description={t('overview.description')} />
-      <div className="stagger mb-4 grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
+      <div className="stagger mb-3 grid grid-cols-2 gap-3 xl:grid-cols-4">
         <Stat
           icon={Hourglass}
           label={t('overview.pendingPlayers')}
@@ -91,7 +91,7 @@ export function OverviewPage() {
         <Stat tone="warning" icon={Film} label={t('overview.pendingReels')} value={pendingReels} to="/reels" />
         <Stat tone="danger" icon={Flag} label={t('overview.openReports')} value={openReports} to="/reports" />
       </div>
-      <div className="stagger mb-4 grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
+      <div className="stagger mb-3 grid grid-cols-2 gap-3 xl:grid-cols-4">
         <Stat icon={Users} label={t('overview.totalUsers')} value={live.length} to="/users" />
         <Stat icon={Users} label={t('overview.players')} value={live.filter((u) => u.role === 'player').length} />
         <Stat icon={Users} label={t('overview.trainers')} value={live.filter((u) => u.role === 'trainer').length} />
@@ -101,7 +101,7 @@ export function OverviewPage() {
           value={profiles.filter((p) => now - p.submittedAt < WEEK).length}
         />
       </div>
-      <div className="stagger mb-6 grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
+      <div className="stagger mb-4 grid grid-cols-2 gap-3 xl:grid-cols-4">
         <Stat
           tone="success"
           icon={CheckCircle2}
@@ -119,7 +119,7 @@ export function OverviewPage() {
         <Stat icon={Star} label={t('overview.featuredProfiles')} value={featured} to="/featured" />
         <Stat icon={Receipt} label={t('overview.payments')} value={paid} to="/transactions" />
       </div>
-      <div className="grid gap-4 lg:grid-cols-3">
+      <div className="grid gap-3 lg:grid-cols-3">
         <Card className="lg:col-span-2">
           <CardHeader>
             <CardTitle>{t('overview.revenueTrend')}</CardTitle>
@@ -136,7 +136,7 @@ export function OverviewPage() {
             </ResponsiveContainer>
           </CardContent>
         </Card>
-        <div className="grid grid-cols-2 gap-3 lg:grid-cols-1 lg:gap-4">
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-1 lg:gap-3">
           <Stat icon={Wallet} label={t('overview.revenueMonth')} value={`${last} KWD`} to="/revenue" />
           <Stat tone="warning" icon={Hourglass} label={t('overview.overdue')} value={overdue} />
         </div>

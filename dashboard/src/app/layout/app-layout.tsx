@@ -20,7 +20,7 @@ export function AppLayout() {
       <AppSidebar />
       <SidebarInset className="bg-background">
         <div className="bg-brand-gradient h-1 w-full" aria-hidden />
-        <header className="bg-card/80 sticky top-0 z-10 flex h-16 items-center gap-2 border-b px-4 backdrop-blur">
+        <header className="bg-card/80 sticky top-0 z-10 flex h-14 items-center gap-2 border-b px-4 backdrop-blur">
           <SidebarTrigger />
           <Separator orientation="vertical" className="h-5" />
           <Wordmark className="h-7 md:hidden" />
@@ -30,7 +30,7 @@ export function AppLayout() {
             <UserMenu />
           </div>
         </header>
-        <div className="bg-page-wash flex-1 p-4 md:p-6">
+        <div className="bg-page-wash flex-1 p-3 md:px-5 md:py-4">
           {/* Keyed by path so each screen eases in. */}
           <div key={pathname} className="page-enter">
             <Outlet />

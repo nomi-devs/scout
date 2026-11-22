@@ -167,7 +167,7 @@ export function ProfileReviewPage() {
         </Card>
       )}
 
-      <div className="grid gap-4 lg:grid-cols-3">
+      <div className="grid gap-3 lg:grid-cols-3">
         <Card className="lg:col-span-2">
           <CardHeader className="flex-row items-center gap-3">
             <Avatar className="size-14">
@@ -183,7 +183,7 @@ export function ProfileReviewPage() {
               </p>
             </div>
           </CardHeader>
-          <CardContent className="space-y-5">
+          <CardContent className="space-y-4">
             <dl className="grid grid-cols-3 gap-2 border-b pb-4">
               {[
                 [t('review.yearsOld'), p.age],
@@ -272,7 +272,7 @@ export function ProfileReviewPage() {
           </CardContent>
         </Card>
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           {p.role === 'trainer' && (
             <Card>
               <CardHeader>

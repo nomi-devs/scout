@@ -480,23 +480,19 @@
   },
   "settings": {
     "description": "Global settings the app reads on launch.",
-    "payments": "Payments",
-    "paymentsHint": "Which provider the app uses at checkout.",
-    "provider": "Payment provider",
     "featuredEnabled": "Featured add-on enabled",
     "features": "App features",
     "reelsEnabled": "Show Reels tabs",
     "guestBrowsing": "Allow guest browsing",
-    "minIos": "Minimum iOS version",
-    "minAndroid": "Minimum Android version",
     "contact": "Support contact",
     "contactHint": "Shown on the Contact us screen.",
     "supportEmail": "Support email",
     "emailAvailability": "Email availability text",
     "phone": "Phone / WhatsApp",
     "phoneAvailability": "Phone availability text",
-    "methods": "Users pay with KNET, Apple Pay, Visa or MasterCard.",
-    "reelRules": "Each user can upload up to {{perMonth}} reels a month. Each reel can be up to {{minutes}} minutes long."
+    "reelRules": "Each user can upload up to {{perMonth}} reels a month. Each reel can be up to {{minutes}} minutes long.",
+    "security": "Security",
+    "version": "App version"
   },
   "admins": {
     "description": "Admin accounts and their roles.",
@@ -521,7 +517,8 @@
       "suspend": "Suspended",
       "unsuspend": "Unsuspended",
       "resetPassword": "Password reset sent",
-      "dismiss": "Dismissed"
+      "dismiss": "Dismissed",
+      "changePassword": "Password changed"
     },
     "areas": {
       "auth": "Account",
@@ -644,5 +641,44 @@
     "title": "Something went wrong",
     "body": "This screen could not load. Your changes so far are saved. Try again, or go back to the overview.",
     "retry": "Try again"
+  },
+  "password": {
+    "title": "Change password",
+    "hint": "Use at least 8 characters with a letter and a number.",
+    "current": "Current password",
+    "new": "New password",
+    "confirm": "Confirm new password",
+    "submit": "Change password",
+    "changed": "Password changed.",
+    "errors": {
+      "current": "Enter your current password.",
+      "min": "Use at least 8 characters.",
+      "letter": "Include at least one letter.",
+      "digit": "Include at least one number.",
+      "confirm": "Confirm the new password.",
+      "match": "The passwords do not match.",
+      "same": "The new password must be different."
+    }
+  },
+  "forceUpdate": {
+    "title": "App Version & Force Update",
+    "description": "Require users to update the mobile app. Users on an older version are blocked until they update from the store.",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "onNote": "On — users on an older version are blocked until they update.",
+    "offNote": "Off — nobody is blocked, regardless of version.",
+    "beforeEnabling": "Set a version and store link for each platform before enabling.",
+    "android": "Android (Google Play)",
+    "ios": "iOS (App Store)",
+    "latestVersion": "Latest version",
+    "storeLink": "Store link",
+    "versionFormat": "Format: 1.2.3 or 1.2.3+6",
+    "messageEn": "Update message (English)",
+    "messageAr": "Update message (Arabic)",
+    "errors": {
+      "version": "Use the format 1.2.3 or 1.2.3+6.",
+      "link": "Enter a valid https store link.",
+      "required": "Required"
+    }
   }
 }
