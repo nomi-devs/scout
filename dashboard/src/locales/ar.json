@@ -1,0 +1,536 @@
+{
+  "app": {
+    "name": "لوحة تحكم سكاوت",
+    "language": "اللغة",
+    "english": "English",
+    "arabic": "العربية",
+    "signOut": "تسجيل الخروج",
+    "adminPanel": "لوحة الإدارة",
+    "account": "الحساب"
+  },
+  "roles": {
+    "super_admin": "مدير عام",
+    "moderator": "مشرف",
+    "finance": "المالية",
+    "content_manager": "مدير المحتوى"
+  },
+  "nav": {
+    "groups": {
+      "general": "عام",
+      "moderation": "الإشراف",
+      "finance": "المالية",
+      "content": "المحتوى",
+      "system": "النظام"
+    },
+    "overview": "نظرة عامة",
+    "players": "اللاعبون",
+    "trainers": "المدربون",
+    "reels": "المقاطع",
+    "reports": "البلاغات",
+    "users": "المستخدمون",
+    "featured": "الملفات المميزة",
+    "subscriptions": "الاشتراكات",
+    "plans": "الباقات",
+    "coupons": "القسائم",
+    "transactions": "المعاملات",
+    "revenue": "الإيرادات",
+    "onboarding": "شرائح الترحيب",
+    "banners": "الإعلانات",
+    "sports": "الرياضات",
+    "lists": "القوائم",
+    "cms": "صفحات المحتوى",
+    "faq": "الأسئلة الشائعة",
+    "notifications": "الإشعارات",
+    "settings": "إعدادات التطبيق",
+    "admins": "المشرفون",
+    "audit": "سجل التدقيق"
+  },
+  "login": {
+    "title": "مرحبًا بعودتك",
+    "subtitle": "سجّل الدخول ببريدك الإداري وكلمة المرور.",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "submit": "تسجيل الدخول",
+    "forgot": "نسيت كلمة المرور؟",
+    "errors": {
+      "email": "أدخل بريدًا إلكترونيًا صحيحًا.",
+      "password": "كلمة المرور مطلوبة."
+    },
+    "badge": "سكاوت · الإدارة",
+    "brandTitle": "أدِر سكاوت من مكان واحد",
+    "brandBody": "راجع ملفات اللاعبين والمدربين، وأدِر الباقات والمدفوعات، وحدّث محتوى التطبيق بالعربية والإنجليزية.",
+    "highlights": {
+      "review": "مراجعة ملفات اللاعبين والمدربين والموافقة عليها",
+      "money": "الباقات والقسائم والاشتراكات والإيرادات",
+      "content": "اللافتات والرياضات والشرائح التعريفية والإشعارات"
+    },
+    "footer": "© 2026 سكاوت · صُمّم للرياضيين في الكويت والخليج"
+  },
+  "notFound": {
+    "title": "الصفحة غير موجودة",
+    "back": "العودة إلى النظرة العامة"
+  },
+  "common": {
+    "search": "بحث",
+    "empty": "لا يوجد شيء بعد.",
+    "save": "حفظ",
+    "saved": "تم الحفظ.",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "delete": "حذف",
+    "deleted": "تم الحذف.",
+    "deleteTitle": "حذف هذا العنصر؟",
+    "edit": "تعديل",
+    "back": "رجوع",
+    "yes": "نعم",
+    "no": "لا",
+    "required": "مطلوب",
+    "bilingualHint": "الإنجليزية والعربية كلتاهما مطلوبتان.",
+    "moveUp": "تحريك للأعلى",
+    "moveDown": "تحريك للأسفل"
+  },
+  "status": {
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "sent": "تم الإرسال",
+    "scheduled": "مجدول"
+  },
+  "col": {
+    "name": "الاسم",
+    "type": "النوع",
+    "status": "الحالة",
+    "title": "العنوان",
+    "body": "المحتوى",
+    "sport": "الرياضة",
+    "specialization": "التخصص",
+    "location": "الموقع",
+    "submitted": "تاريخ الإرسال",
+    "age": "العمر",
+    "email": "البريد الإلكتروني",
+    "phone": "الهاتف",
+    "role": "الدور",
+    "joined": "تاريخ الانضمام",
+    "reasons": "الأسباب",
+    "reporters": "المبلّغون",
+    "reported": "تاريخ البلاغ",
+    "reportedProfile": "الملف المبلّغ عنه",
+    "target": "الوجهة",
+    "views": "المشاهدات",
+    "taps": "النقرات",
+    "profiles": "الملفات",
+    "list": "القائمة",
+    "page": "الصفحة",
+    "updated": "آخر تحديث",
+    "question": "السؤال",
+    "answer": "الإجابة",
+    "audience": "الجمهور",
+    "when": "الموعد",
+    "months": "الأشهر",
+    "code": "الرمز",
+    "discount": "الخصم",
+    "used": "المستخدم",
+    "expires": "ينتهي",
+    "invoice": "الفاتورة",
+    "amount": "المبلغ",
+    "method": "الطريقة",
+    "date": "التاريخ",
+    "daysLeft": "الأيام المتبقية",
+    "featured": "مميز",
+    "admin": "المسؤول",
+    "action": "الإجراء",
+    "before": "قبل",
+    "after": "بعد",
+    "price": "السعر",
+    "image": "الصورة",
+    "icon": "الأيقونة",
+    "plan": "الباقة",
+    "started": "تاريخ البدء",
+    "featuredUntil": "مميز حتى",
+    "validity": "الصلاحية",
+    "coupon": "القسيمة",
+    "appliesTo": "تنطبق على",
+    "duration": "المدة"
+  },
+  "f": {
+    "name": "الاسم",
+    "kind": "النوع",
+    "months": "الأشهر",
+    "bestValue": "تحديد كأفضل قيمة",
+    "active": "نشط",
+    "code": "الرمز",
+    "maxUses": "الحد الأقصى للاستخدام",
+    "expiresAt": "ينتهي في",
+    "order": "الترتيب",
+    "title": "العنوان",
+    "body": "المحتوى",
+    "image": "ملف الصورة",
+    "disclosure": "تسمية الإفصاح",
+    "headline": "العنوان الرئيسي",
+    "details": "التفاصيل",
+    "target": "يفتح",
+    "targetValue": "الوجهة (معرّف ملف أو رياضة أو رابط)",
+    "list": "القائمة",
+    "item": "العنصر",
+    "page": "الصفحة",
+    "question": "السؤال",
+    "answer": "الإجابة",
+    "audience": "الجمهور",
+    "scheduleAt": "جدولة في (اتركه فارغًا للإرسال الآن)",
+    "fullName": "الاسم الكامل",
+    "email": "البريد الإلكتروني",
+    "role": "الدور",
+    "price": "السعر (د.ك)",
+    "description": "الوصف",
+    "discountType": "نوع الخصم",
+    "discountValue": "قيمة الخصم",
+    "appliesTo": "تنطبق على",
+    "startsAt": "تبدأ في",
+    "icon": "أيقونة أو صورة"
+  },
+  "profileStatus": {
+    "pending": "بانتظار المراجعة",
+    "resubmitted": "أُعيد إرساله",
+    "approved": "مقبول",
+    "rejected": "مرفوض",
+    "rejectedFinal": "مرفوض (نهائي)",
+    "hidden": "مخفي"
+  },
+  "profiles": {
+    "queueDescription": "الأقدم أولًا. أي ملف ينتظر أكثر من 24 ساعة يظهر باللون الأحمر.",
+    "overdue": "أكثر من 24 ساعة",
+    "beingReviewed": "قيد المراجعة بواسطة {{name}}",
+    "changed": "تغيّر",
+    "filter": {
+      "pending": "قيد الانتظار",
+      "approved": "مقبول",
+      "rejected": "مرفوض",
+      "hidden": "مخفي",
+      "all": "الكل"
+    }
+  },
+  "review": {
+    "gender": "الجنس",
+    "nationality": "الجنسية",
+    "years": "سنوات الخبرة",
+    "submitted": "تاريخ الإرسال",
+    "weight": "الوزن",
+    "height": "الطول",
+    "contactConsent": "الموافقة على التواصل",
+    "phone": "الهاتف",
+    "email": "البريد الإلكتروني",
+    "bio": "النبذة",
+    "photos": "المعرض",
+    "photo": "صورة {{n}}",
+    "certificates": "الشهادات",
+    "cert": {
+      "pending": "لم تتم المراجعة",
+      "reviewed": "تمت المراجعة",
+      "rejected": "مرفوضة"
+    },
+    "genders": {
+      "Male": "ذكر",
+      "Female": "أنثى"
+    },
+    "decision": "القرار",
+    "approve": "قبول",
+    "reject": "رفض",
+    "noDecision": "يمكن اتخاذ القرار فقط للملفات المعلقة التي لا يراجعها شخص آخر.",
+    "readOnly": "للقراءة فقط",
+    "hide": "إخفاء الملف",
+    "unhide": "إظهار الملف",
+    "hiddenToast": "تم إخفاء الملف. سيختفي من التطبيق خلال دقيقة.",
+    "unhiddenToast": "الملف ظاهر مرة أخرى.",
+    "approvedToast": "تم القبول. تم إشعار المستخدم ويمكنه الاشتراك.",
+    "rejectedToast": "تم الرفض. تم إشعار المستخدم بالأسباب.",
+    "rejectTitle": "رفض {{name}}",
+    "rejectHint": "اختر سببًا واحدًا على الأقل. يمكن للمستخدم تعديل الملف وإعادة الإرسال مرة واحدة.",
+    "rejectFinalHint": "أُعيد إرسال هذا الملف سابقًا، لذا فهذا الرفض نهائي.",
+    "reasonRequired": "اختر سببًا واحدًا على الأقل.",
+    "note": "ملاحظة",
+    "confirmReject": "رفض الملف",
+    "rejectionReasons": "أسباب الرفض",
+    "resubmittedHint": "أُعيد إرساله بعد الرفض. الحقول المتغيرة مظللة.",
+    "dob": "تاريخ الميلاد (العمر)",
+    "views": "المشاهدات العامة",
+    "subscription": "الاشتراك",
+    "noSubscription": "لا يوجد اشتراك بعد. يشترك المستخدم بعد الموافقة."
+  },
+  "reports": {
+    "description": "البلاغات المفتوحة أولًا، والأقدم في الأعلى.",
+    "detailDescription": "الملف المبلّغ عنه والأسباب ومن قام بالبلاغ.",
+    "status": {
+      "open": "مفتوح",
+      "dismissed": "تم تجاهله",
+      "hidden": "تم إخفاء الملف",
+      "suspended": "تم إيقاف المستخدم"
+    },
+    "dismiss": "تجاهل",
+    "dismissHint": "إغلاق البلاغ دون إجراء. الملاحظة مطلوبة.",
+    "hide": "إخفاء الملف",
+    "hideHint": "يختفي الملف من التطبيق ويتم إشعار صاحبه.",
+    "suspend": "إيقاف المستخدم",
+    "suspendHint": "لا يستطيع المستخدم تسجيل الدخول ويُخفى ملفه.",
+    "doneToast": "تم تحديث البلاغ.",
+    "resolution": "القرار",
+    "viewProfile": "عرض الملف"
+  },
+  "userRole": {
+    "player": "لاعب",
+    "trainer": "مدرب"
+  },
+  "userStatus": {
+    "active": "نشط",
+    "suspended": "موقوف",
+    "deleted": "محذوف"
+  },
+  "users": {
+    "description": "ابحث عن المستخدمين ثم افتح أحدهم لعرض السجل واتخاذ إجراء.",
+    "history": "السجل",
+    "subscription": "الاشتراك",
+    "noSubscription": "لا يوجد اشتراك نشط",
+    "featured": "مميز حتى",
+    "blocks": "الحظر",
+    "viewProfile": "عرض الملف",
+    "actions": "الإجراءات",
+    "viewOnly": "يمكن للمالية عرض المستخدمين دون تغييرهم.",
+    "extend": "تمديد الاشتراك",
+    "extendDays": "عدد الأيام المضافة",
+    "extendReason": "السبب",
+    "featuredOn": "تفعيل التمييز (30 يومًا)",
+    "featuredOff": "إيقاف التمييز",
+    "suspend": "إيقاف المستخدم",
+    "unsuspend": "إلغاء إيقاف المستخدم",
+    "delete": "حذف المستخدم",
+    "doneToast": "تم. وسُجّل في سجل التدقيق.",
+    "daysLeft": "متبقٍ {{count}} يوم"
+  },
+  "txKind": {
+    "subscription": "اشتراك",
+    "renewal": "تجديد",
+    "featured": "تمييز"
+  },
+  "txStatus": {
+    "paid": "مدفوع",
+    "failed": "فشل",
+    "refunded": "مسترد"
+  },
+  "sportNames": {
+    "football": "كرة القدم",
+    "basketball": "كرة السلة",
+    "volleyball": "الكرة الطائرة",
+    "tennis": "التنس",
+    "cricket": "الكريكيت"
+  },
+  "overview": {
+    "description": "ما يحتاج إلى اهتمام اليوم.",
+    "pendingPlayers": "لاعبون للمراجعة",
+    "pendingTrainers": "مدربون للمراجعة",
+    "openReports": "بلاغات مفتوحة",
+    "revenueTrend": "الإيرادات (د.ك)",
+    "revenueMonth": "إيرادات هذا الشهر",
+    "overdue": "ينتظرون أكثر من 24 ساعة",
+    "pendingReels": "مقاطع للمراجعة",
+    "totalUsers": "إجمالي المستخدمين",
+    "players": "اللاعبون",
+    "trainers": "المدربون",
+    "newProfiles": "ملفات جديدة (7 أيام)",
+    "activeProfiles": "ملفات نشطة",
+    "expiredProfiles": "ملفات منتهية",
+    "featuredProfiles": "ملفات مميزة",
+    "payments": "مدفوعات ناجحة"
+  },
+  "plans": {
+    "description": "العضويات الأساسية وإضافات التمييز. تظهر التغييرات في التطبيق عند التشغيل التالي.",
+    "add": "إضافة باقة",
+    "membership": "عضوية",
+    "featured": "إضافة التمييز",
+    "bestValue": "أفضل قيمة"
+  },
+  "coupons": {
+    "description": "رموز الخصم التي يدخلها المستخدمون عند الدفع.",
+    "add": "إضافة قسيمة",
+    "type": {
+      "percent": "نسبة مئوية (%)",
+      "fixed": "مبلغ ثابت (د.ك)"
+    },
+    "appliesTo": {
+      "subscription": "الاشتراك فقط",
+      "featured": "التمييز فقط",
+      "both": "الاشتراك والتمييز"
+    }
+  },
+  "transactions": {
+    "description": "كل محاولات الدفع. نزّل الفاتورة المدفوعة بصيغة PDF.",
+    "invoice": "تنزيل الفاتورة",
+    "invoiceToast": "تم تنزيل الفاتورة {{invoice}} (تجريبي)."
+  },
+  "subscriptions": {
+    "description": "المستخدمون أصحاب العضويات، الأقرب انتهاءً أولًا.",
+    "expired": "منتهية",
+    "expiringSoon": "تنتهي قريبًا",
+    "plan": {
+      "6m": "6 أشهر",
+      "12m": "سنة"
+    }
+  },
+  "featured": {
+    "description": "الملفات التي لديها فترة تمييز نشطة.",
+    "remove": "إزالة التمييز",
+    "extend": "تمديد 30 يومًا"
+  },
+  "revenue": {
+    "description": "الإيرادات حسب الشهر وحسب المنتج.",
+    "total": "إجمالي الإيرادات",
+    "subscriptions": "الاشتراكات",
+    "featured": "التمييز",
+    "byMonth": "الإيرادات حسب الشهر (د.ك)"
+  },
+  "onboarding": {
+    "description": "الشرائح المعروضة قبل التسجيل. الترتيب يحدد التسلسل.",
+    "add": "إضافة شريحة"
+  },
+  "banners": {
+    "description": "اللافتات الإعلانية في الشاشة الرئيسية مع المشاهدات والنقرات.",
+    "add": "إضافة لافتة",
+    "target": {
+      "profile": "ملف شخصي",
+      "sport": "رياضة",
+      "url": "رابط ويب"
+    }
+  },
+  "sports": {
+    "description": "الرياضات المتاحة في التطبيق.",
+    "add": "إضافة رياضة"
+  },
+  "lists": {
+    "description": "القوائم المستخدمة في نماذج الملفات والفلاتر وأسباب الرفض والبلاغات.",
+    "add": "إضافة عنصر",
+    "types": {
+      "nationalities": "الجنسيات",
+      "locations": "المواقع",
+      "trainerSpecializations": "تخصصات المدربين",
+      "playerSpecializations": "تخصصات اللاعبين",
+      "rejectionReasons": "أسباب الرفض",
+      "reportReasons": "أسباب البلاغات"
+    }
+  },
+  "cms": {
+    "description": "الصفحات الثابتة المعروضة في قائمة حساب التطبيق.",
+    "add": "إضافة صفحة",
+    "pages": {
+      "terms": "الشروط",
+      "privacy": "الخصوصية",
+      "about": "عن التطبيق"
+    }
+  },
+  "faq": {
+    "description": "الأسئلة المعروضة في شاشة الأسئلة الشائعة.",
+    "add": "إضافة سؤال"
+  },
+  "notifications": {
+    "description": "أرسل إشعارًا ورسالة صندوق وارد لمجموعة من المستخدمين، الآن أو لاحقًا.",
+    "add": "بث جديد",
+    "immediately": "فورًا",
+    "sendNow": "أرسل الآن",
+    "sentToast": "تم إرسال البث (تجريبي).",
+    "autoTitle": "الإشعارات التلقائية",
+    "autoBody": "يرسلها النظام تلقائيًا ويراها المستخدمون في صندوق الإشعارات.",
+    "auto": {
+      "renewal": "التجديد",
+      "membershipEnded": "انتهاء العضوية",
+      "expiryReminder": "تذكير قبل الانتهاء بـ 7 أيام",
+      "featuredEnded": "انتهاء التمييز",
+      "profileApproved": "قبول الملف",
+      "profileRejected": "رفض الملف",
+      "reelReviewed": "قبول المقطع أو رفضه"
+    },
+    "audience": {
+      "all": "الجميع",
+      "players": "اللاعبون",
+      "trainers": "المدربون",
+      "featured": "الملفات المميزة"
+    }
+  },
+  "settings": {
+    "description": "الإعدادات العامة التي يقرأها التطبيق عند التشغيل.",
+    "payments": "المدفوعات",
+    "paymentsHint": "مزوّد الدفع الذي يستخدمه التطبيق.",
+    "provider": "مزوّد الدفع",
+    "featuredEnabled": "تفعيل إضافة التمييز",
+    "features": "ميزات التطبيق",
+    "reelsEnabled": "إظهار تبويبات المقاطع",
+    "guestBrowsing": "السماح بالتصفح كضيف",
+    "minIos": "أدنى إصدار iOS",
+    "minAndroid": "أدنى إصدار Android",
+    "contact": "التواصل مع الدعم",
+    "contactHint": "يظهر في شاشة تواصل معنا.",
+    "supportEmail": "بريد الدعم",
+    "emailAvailability": "نص توفر البريد",
+    "phone": "الهاتف / واتساب",
+    "phoneAvailability": "نص توفر الهاتف",
+    "methods": "يدفع المستخدمون عبر KNET أو Apple Pay أو Visa أو MasterCard."
+  },
+  "admins": {
+    "description": "حسابات المسؤولين وأدوارهم.",
+    "add": "إضافة مسؤول"
+  },
+  "audit": {
+    "description": "كل إجراء للمسؤولين مع القيم قبل وبعد."
+  },
+  "table": {
+    "showing": "عرض {{from}}–{{to}} من {{total}}",
+    "rowsPerPage": "عدد الصفوف",
+    "pagination": "التنقل بين الصفحات",
+    "first": "الصفحة الأولى",
+    "prev": "الصفحة السابقة",
+    "next": "الصفحة التالية",
+    "last": "الصفحة الأخيرة",
+    "clear": "مسح الفلاتر"
+  },
+  "filters": {
+    "allSports": "كل الرياضات",
+    "allLocations": "كل المواقع",
+    "allStatuses": "كل الحالات",
+    "allReasons": "كل الأسباب",
+    "allTypes": "كل الأنواع",
+    "allMethods": "كل طرق الدفع",
+    "allAreas": "كل الأقسام",
+    "allLists": "كل القوائم"
+  },
+  "reels": {
+    "description": "مقاطع الفيديو التي يرفعها المستخدمون من إنشاء مقطع. راجع كل مقطع قبل نشره.",
+    "filter": {
+      "pending": "قيد الانتظار",
+      "approved": "مقبول",
+      "rejected": "مرفوض",
+      "hidden": "مخفي",
+      "all": "الكل"
+    },
+    "status": {
+      "pending": "قيد المراجعة",
+      "approved": "منشور",
+      "rejected": "مرفوض",
+      "hidden": "مخفي"
+    },
+    "details": "تفاصيل المقطع",
+    "descriptionLabel": "الوصف",
+    "video": "فيديو المقطع",
+    "hide": "إخفاء المقطع",
+    "unhide": "إظهار المقطع",
+    "approvedToast": "تم قبول المقطع ونشره. تم إشعار المستخدم.",
+    "rejectedToast": "تم رفض المقطع. تم إشعار المستخدم بالأسباب.",
+    "hiddenToast": "تم إخفاء المقطع من التطبيق.",
+    "unhiddenToast": "المقطع ظاهر مرة أخرى.",
+    "noDecision": "يمكن قبول المقاطع المعلقة أو رفضها فقط.",
+    "rejectTitle": "رفض «{{title}}»",
+    "rejectHint": "اختر سببًا واحدًا على الأقل. يراه المستخدم في إشعاراته.",
+    "confirmReject": "رفض المقطع",
+    "rejectionReason": "سبب الرفض",
+    "reasons": {
+      "inappropriate": "محتوى غير لائق",
+      "quality": "جودة الفيديو ضعيفة",
+      "misleading": "معلومات مضللة",
+      "notSports": "لا علاقة له بالرياضة"
+    }
+  }
+}

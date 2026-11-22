@@ -1,0 +1,536 @@
+{
+  "app": {
+    "name": "Scout Admin",
+    "language": "Language",
+    "english": "English",
+    "arabic": "العربية",
+    "signOut": "Sign out",
+    "adminPanel": "Admin panel",
+    "account": "Account"
+  },
+  "roles": {
+    "super_admin": "Super admin",
+    "moderator": "Moderator",
+    "finance": "Finance",
+    "content_manager": "Content manager"
+  },
+  "nav": {
+    "groups": {
+      "general": "General",
+      "moderation": "Moderation",
+      "finance": "Finance",
+      "content": "Content",
+      "system": "System"
+    },
+    "overview": "Overview",
+    "players": "Players",
+    "trainers": "Trainers",
+    "reels": "Reels",
+    "reports": "Reports",
+    "users": "Users",
+    "featured": "Featured profiles",
+    "subscriptions": "Subscriptions",
+    "plans": "Plans",
+    "coupons": "Coupons",
+    "transactions": "Transactions",
+    "revenue": "Revenue",
+    "onboarding": "Onboarding slides",
+    "banners": "Banners",
+    "sports": "Sports",
+    "lists": "Lists",
+    "cms": "CMS pages",
+    "faq": "FAQ",
+    "notifications": "Notifications",
+    "settings": "App settings",
+    "admins": "Admin users",
+    "audit": "Audit log"
+  },
+  "login": {
+    "title": "Welcome back",
+    "subtitle": "Sign in with your admin email and password.",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign in",
+    "forgot": "Forgot password?",
+    "errors": {
+      "email": "Enter a valid email address.",
+      "password": "Password is required."
+    },
+    "badge": "Scout · Admin",
+    "brandTitle": "Run Scout from one place",
+    "brandBody": "Review players and trainers, manage plans and payments, and keep the app content fresh in English and Arabic.",
+    "highlights": {
+      "review": "Review and approve player and trainer profiles",
+      "money": "Plans, coupons, subscriptions and revenue",
+      "content": "Banners, sports, onboarding and broadcasts"
+    },
+    "footer": "© 2026 Scout · Made for athletes in Kuwait and the Gulf"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "back": "Back to overview"
+  },
+  "common": {
+    "search": "Search",
+    "empty": "Nothing here yet.",
+    "save": "Save",
+    "saved": "Saved.",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "deleted": "Deleted.",
+    "deleteTitle": "Delete this item?",
+    "edit": "Edit",
+    "back": "Back",
+    "yes": "Yes",
+    "no": "No",
+    "required": "Required",
+    "bilingualHint": "English and Arabic are both required.",
+    "moveUp": "Move up",
+    "moveDown": "Move down"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "sent": "Sent",
+    "scheduled": "Scheduled"
+  },
+  "col": {
+    "name": "Name",
+    "type": "Type",
+    "status": "Status",
+    "title": "Title",
+    "body": "Body",
+    "sport": "Sport",
+    "specialization": "Specialization",
+    "location": "Location",
+    "submitted": "Submitted",
+    "age": "Age",
+    "email": "Email",
+    "phone": "Phone",
+    "role": "Role",
+    "joined": "Joined",
+    "reasons": "Reasons",
+    "reporters": "Reporters",
+    "reported": "Reported",
+    "reportedProfile": "Reported profile",
+    "target": "Target",
+    "views": "Views",
+    "taps": "Taps",
+    "profiles": "Profiles",
+    "list": "List",
+    "page": "Page",
+    "updated": "Updated",
+    "question": "Question",
+    "answer": "Answer",
+    "audience": "Audience",
+    "when": "When",
+    "months": "Months",
+    "code": "Code",
+    "discount": "Discount",
+    "used": "Used",
+    "expires": "Expires",
+    "invoice": "Invoice",
+    "amount": "Amount",
+    "method": "Method",
+    "date": "Date",
+    "daysLeft": "Days left",
+    "featured": "Featured",
+    "admin": "Admin",
+    "action": "Action",
+    "before": "Before",
+    "after": "After",
+    "price": "Price",
+    "image": "Image",
+    "icon": "Icon",
+    "plan": "Plan",
+    "started": "Started",
+    "featuredUntil": "Featured until",
+    "validity": "Validity",
+    "coupon": "Coupon",
+    "appliesTo": "Applies to",
+    "duration": "Length"
+  },
+  "f": {
+    "name": "Name",
+    "kind": "Kind",
+    "months": "Months",
+    "bestValue": "Mark as best value",
+    "active": "Active",
+    "code": "Code",
+    "maxUses": "Maximum uses",
+    "expiresAt": "Expires on",
+    "order": "Order",
+    "title": "Title",
+    "body": "Body",
+    "image": "Image file",
+    "disclosure": "Disclosure label",
+    "headline": "Headline",
+    "details": "Details",
+    "target": "Opens",
+    "targetValue": "Target (profile ID, sport or URL)",
+    "list": "List",
+    "item": "Item",
+    "page": "Page",
+    "question": "Question",
+    "answer": "Answer",
+    "audience": "Audience",
+    "scheduleAt": "Schedule for (leave empty to send now)",
+    "fullName": "Full name",
+    "email": "Email",
+    "role": "Role",
+    "price": "Price (KWD)",
+    "description": "Description",
+    "discountType": "Discount type",
+    "discountValue": "Discount value",
+    "appliesTo": "Applies to",
+    "startsAt": "Starts on",
+    "icon": "Icon or image"
+  },
+  "profileStatus": {
+    "pending": "Pending review",
+    "resubmitted": "Resubmitted",
+    "approved": "Approved",
+    "rejected": "Rejected",
+    "rejectedFinal": "Rejected (final)",
+    "hidden": "Hidden"
+  },
+  "profiles": {
+    "queueDescription": "Oldest pending first. Anything waiting more than 24 hours is shown in red.",
+    "overdue": "over 24 h",
+    "beingReviewed": "Being reviewed by {{name}}",
+    "changed": "changed",
+    "filter": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "hidden": "Hidden",
+      "all": "All"
+    }
+  },
+  "review": {
+    "gender": "Gender",
+    "nationality": "Nationality",
+    "years": "Years of experience",
+    "submitted": "Submitted",
+    "weight": "Weight",
+    "height": "Height",
+    "contactConsent": "Contact consent",
+    "phone": "Phone",
+    "email": "Email",
+    "bio": "Bio",
+    "photos": "Gallery",
+    "photo": "Photo {{n}}",
+    "certificates": "Certificates",
+    "cert": {
+      "pending": "Not reviewed",
+      "reviewed": "Reviewed",
+      "rejected": "Rejected"
+    },
+    "genders": {
+      "Male": "Male",
+      "Female": "Female"
+    },
+    "decision": "Decision",
+    "approve": "Approve",
+    "reject": "Reject",
+    "noDecision": "Only pending profiles that nobody else is reviewing can be decided.",
+    "readOnly": "read-only",
+    "hide": "Hide profile",
+    "unhide": "Unhide profile",
+    "hiddenToast": "Profile hidden. It disappears from the app within a minute.",
+    "unhiddenToast": "Profile visible again.",
+    "approvedToast": "Approved. The user is notified and can subscribe.",
+    "rejectedToast": "Rejected. The user is notified with the reasons.",
+    "rejectTitle": "Reject {{name}}",
+    "rejectHint": "Pick at least one reason. The user can fix the profile and resubmit once.",
+    "rejectFinalHint": "This profile was already resubmitted, so this rejection is final.",
+    "reasonRequired": "Pick at least one reason.",
+    "note": "Note",
+    "confirmReject": "Reject profile",
+    "rejectionReasons": "Rejection reasons",
+    "resubmittedHint": "Resubmitted after a rejection. Changed fields are highlighted.",
+    "dob": "Date of birth (age)",
+    "views": "Public views",
+    "subscription": "Subscription",
+    "noSubscription": "No subscription yet. The user subscribes after approval."
+  },
+  "reports": {
+    "description": "Open reports first, oldest on top.",
+    "detailDescription": "Reported profile, reasons and who reported it.",
+    "status": {
+      "open": "Open",
+      "dismissed": "Dismissed",
+      "hidden": "Profile hidden",
+      "suspended": "User suspended"
+    },
+    "dismiss": "Dismiss",
+    "dismissHint": "Close the report with no action. A note is required.",
+    "hide": "Hide profile",
+    "hideHint": "The profile disappears from the app and its owner is notified.",
+    "suspend": "Suspend user",
+    "suspendHint": "The user cannot log in and the profile is hidden.",
+    "doneToast": "Report updated.",
+    "resolution": "Resolution",
+    "viewProfile": "View profile"
+  },
+  "userRole": {
+    "player": "Player",
+    "trainer": "Trainer"
+  },
+  "userStatus": {
+    "active": "Active",
+    "suspended": "Suspended",
+    "deleted": "Deleted"
+  },
+  "users": {
+    "description": "Search users, then open one to see history and take action.",
+    "history": "History",
+    "subscription": "Subscription",
+    "noSubscription": "No active subscription",
+    "featured": "Featured until",
+    "blocks": "Blocks",
+    "viewProfile": "View profile",
+    "actions": "Actions",
+    "viewOnly": "Finance can view users but not change them.",
+    "extend": "Extend subscription",
+    "extendDays": "Days to add",
+    "extendReason": "Reason",
+    "featuredOn": "Turn Featured on (30 days)",
+    "featuredOff": "Turn Featured off",
+    "suspend": "Suspend user",
+    "unsuspend": "Unsuspend user",
+    "delete": "Delete user",
+    "doneToast": "Done. It is saved in the audit log.",
+    "daysLeft": "{{count}} days left"
+  },
+  "txKind": {
+    "subscription": "Subscription",
+    "renewal": "Renewal",
+    "featured": "Featured"
+  },
+  "txStatus": {
+    "paid": "Paid",
+    "failed": "Failed",
+    "refunded": "Refunded"
+  },
+  "sportNames": {
+    "football": "Football",
+    "basketball": "Basketball",
+    "volleyball": "Volleyball",
+    "tennis": "Tennis",
+    "cricket": "Cricket"
+  },
+  "overview": {
+    "description": "What needs attention today.",
+    "pendingPlayers": "Players to review",
+    "pendingTrainers": "Trainers to review",
+    "openReports": "Open reports",
+    "revenueTrend": "Revenue (KWD)",
+    "revenueMonth": "Revenue this month",
+    "overdue": "Waiting over 24 h",
+    "pendingReels": "Reels to review",
+    "totalUsers": "Total users",
+    "players": "Players",
+    "trainers": "Trainers",
+    "newProfiles": "New profiles (7 days)",
+    "activeProfiles": "Active profiles",
+    "expiredProfiles": "Expired profiles",
+    "featuredProfiles": "Featured profiles",
+    "payments": "Successful payments"
+  },
+  "plans": {
+    "description": "Base memberships and Featured add-ons. Changes show in the app on next launch.",
+    "add": "Add plan",
+    "membership": "Membership",
+    "featured": "Featured add-on",
+    "bestValue": "Best value"
+  },
+  "coupons": {
+    "description": "Discount codes users enter at checkout.",
+    "add": "Add coupon",
+    "type": {
+      "percent": "Percentage (%)",
+      "fixed": "Fixed amount (KWD)"
+    },
+    "appliesTo": {
+      "subscription": "Subscription only",
+      "featured": "Featured only",
+      "both": "Subscription and Featured"
+    }
+  },
+  "transactions": {
+    "description": "Every payment attempt. Download a paid invoice as PDF.",
+    "invoice": "Download invoice",
+    "invoiceToast": "Invoice {{invoice}} downloaded (mock)."
+  },
+  "subscriptions": {
+    "description": "Users with a membership, soonest to expire first.",
+    "expired": "Expired",
+    "expiringSoon": "Expiring soon",
+    "plan": {
+      "6m": "6 months",
+      "12m": "1 year"
+    }
+  },
+  "featured": {
+    "description": "Profiles with an active Featured period.",
+    "remove": "Remove Featured",
+    "extend": "Extend 30 days"
+  },
+  "revenue": {
+    "description": "Revenue by month and by product.",
+    "total": "Total revenue",
+    "subscriptions": "Subscriptions",
+    "featured": "Featured",
+    "byMonth": "Revenue by month (KWD)"
+  },
+  "onboarding": {
+    "description": "Slides shown before sign-up. Order decides the sequence.",
+    "add": "Add slide"
+  },
+  "banners": {
+    "description": "Sponsored banners on the Home screen, with views and taps.",
+    "add": "Add banner",
+    "target": {
+      "profile": "A profile",
+      "sport": "A sport",
+      "url": "A web link"
+    }
+  },
+  "sports": {
+    "description": "Sports available in the app.",
+    "add": "Add sport"
+  },
+  "lists": {
+    "description": "Pick-lists used by profile forms, filters, rejections and reports.",
+    "add": "Add item",
+    "types": {
+      "nationalities": "Nationalities",
+      "locations": "Locations",
+      "trainerSpecializations": "Trainer specializations",
+      "playerSpecializations": "Player specializations",
+      "rejectionReasons": "Rejection reasons",
+      "reportReasons": "Report reasons"
+    }
+  },
+  "cms": {
+    "description": "Static pages shown in the app account menu.",
+    "add": "Add page",
+    "pages": {
+      "terms": "Terms",
+      "privacy": "Privacy",
+      "about": "About"
+    }
+  },
+  "faq": {
+    "description": "Questions shown in the app FAQ screen.",
+    "add": "Add question"
+  },
+  "notifications": {
+    "description": "Send a push and inbox message to a group of users, now or later.",
+    "add": "New broadcast",
+    "immediately": "Immediately",
+    "sendNow": "Send now",
+    "sentToast": "Broadcast sent (mock).",
+    "autoTitle": "Automatic notifications",
+    "autoBody": "These are sent by the system. Users see them in the app inbox.",
+    "auto": {
+      "renewal": "Renewal",
+      "membershipEnded": "Membership ended",
+      "expiryReminder": "7-day expiry reminder",
+      "featuredEnded": "Featured ended",
+      "profileApproved": "Profile approved",
+      "profileRejected": "Profile rejected",
+      "reelReviewed": "Reel approved or rejected"
+    },
+    "audience": {
+      "all": "Everyone",
+      "players": "Players",
+      "trainers": "Trainers",
+      "featured": "Featured profiles"
+    }
+  },
+  "settings": {
+    "description": "Global settings the app reads on launch.",
+    "payments": "Payments",
+    "paymentsHint": "Which provider the app uses at checkout.",
+    "provider": "Payment provider",
+    "featuredEnabled": "Featured add-on enabled",
+    "features": "App features",
+    "reelsEnabled": "Show Reels tabs",
+    "guestBrowsing": "Allow guest browsing",
+    "minIos": "Minimum iOS version",
+    "minAndroid": "Minimum Android version",
+    "contact": "Support contact",
+    "contactHint": "Shown on the Contact us screen.",
+    "supportEmail": "Support email",
+    "emailAvailability": "Email availability text",
+    "phone": "Phone / WhatsApp",
+    "phoneAvailability": "Phone availability text",
+    "methods": "Users pay with KNET, Apple Pay, Visa or MasterCard."
+  },
+  "admins": {
+    "description": "Admin accounts and their roles.",
+    "add": "Add admin"
+  },
+  "audit": {
+    "description": "Every admin action with before and after values."
+  },
+  "table": {
+    "showing": "Showing {{from}}–{{to}} of {{total}}",
+    "rowsPerPage": "Rows per page",
+    "pagination": "Pagination",
+    "first": "First page",
+    "prev": "Previous page",
+    "next": "Next page",
+    "last": "Last page",
+    "clear": "Clear filters"
+  },
+  "filters": {
+    "allSports": "All sports",
+    "allLocations": "All locations",
+    "allStatuses": "All statuses",
+    "allReasons": "All reasons",
+    "allTypes": "All types",
+    "allMethods": "All methods",
+    "allAreas": "All areas",
+    "allLists": "All lists"
+  },
+  "reels": {
+    "description": "Videos users upload from Create Reel. Review each one before it is published.",
+    "filter": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "hidden": "Hidden",
+      "all": "All"
+    },
+    "status": {
+      "pending": "Pending review",
+      "approved": "Published",
+      "rejected": "Rejected",
+      "hidden": "Hidden"
+    },
+    "details": "Reel details",
+    "descriptionLabel": "Description",
+    "video": "Reel video",
+    "hide": "Hide reel",
+    "unhide": "Unhide reel",
+    "approvedToast": "Reel approved and published. The user is notified.",
+    "rejectedToast": "Reel rejected. The user is notified with the reasons.",
+    "hiddenToast": "Reel hidden from the app.",
+    "unhiddenToast": "Reel visible again.",
+    "noDecision": "Only pending reels can be approved or rejected.",
+    "rejectTitle": "Reject “{{title}}”",
+    "rejectHint": "Pick at least one reason. The user sees it in their notifications.",
+    "confirmReject": "Reject reel",
+    "rejectionReason": "Rejection reason",
+    "reasons": {
+      "inappropriate": "Inappropriate content",
+      "quality": "Poor video quality",
+      "misleading": "Misleading information",
+      "notSports": "Not sports related"
+    }
+  }
+}
