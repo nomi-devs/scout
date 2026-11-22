@@ -22,10 +22,14 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { useSession } from '@/features/auth/session-context'
 import { formatDate } from '@/lib/format'
+import trainerImg from '@/assets/seed/trainer.jpg'
+import trainingCampImg from '@/assets/seed/training-camp.jpg'
 import { reviewReasons, type CertStatus, type ProfileRec } from '@/mock/data'
 import { useMockStore } from '@/mock/store'
 
 import { isPending, ProfileStatusBadge } from './profile-status'
+
+const galleryImages = [trainingCampImg, trainerImg]
 
 const initials = (name: string) =>
   name
@@ -172,43 +176,97 @@ export function ProfileReviewPage() {
             <div>
               <CardTitle>{p.name}</CardTitle>
               <p className="text-muted-foreground text-sm">
-                {t(`sportNames.${p.sport}`)} · {p.specialization}
+                {t(p.role === 'trainer' ? 'review.sportTrainer' : 'review.sportPlayer', {
+                  sport: t(`sportNames.${p.sport}`),
+                })}{' '}
+                · {p.location}
               </p>
             </div>
           </CardHeader>
-          <CardContent>
-            <dl className="grid grid-cols-2 gap-2 md:grid-cols-3">
-              <Info label={t('review.dob')} value={p.dob ? `${formatDate(p.dob, i18n.language)} (${p.age})` : p.age} />
-              <Info label={t('review.gender')} value={t(`review.genders.${p.gender}`)} />
-              <Info label={t('review.nationality')} value={p.nationality} />
-              <Info label={t('col.location')} value={p.location} />
-              <Info label={t('review.years')} value={p.years} />
-              <Info label={t('review.submitted')} value={formatDate(p.submittedAt, i18n.language)} />
-              {p.role === 'player' && <Info label={t('review.weight')} value={`${p.weightKg} kg`} />}
-              {p.role === 'player' && <Info label={t('review.height')} value={`${p.heightCm} cm`} />}
-              <Info label={t('review.views')} value={p.views.toLocaleString(i18n.language)} />
-              <Info label={t('review.contactConsent')} value={p.contactConsent ? t('common.yes') : t('common.no')} />
-              <Info label={t('review.phone')} value={p.phone} />
-              <Info label={t('review.email')} value={p.email} />
+          <CardContent className="space-y-5">
+            <dl className="grid grid-cols-3 gap-2 border-b pb-4">
+              {[
+                [t('review.yearsOld'), p.age],
+                [t('review.nationality'), p.nationality],
+                [t('review.experience'), t('review.yearsValue', { n: p.years })],
+              ].map(([label, value]) => (
+                <div key={String(label)}>
+                  <dd className="font-heading text-xl font-bold">{value}</dd>
+                  <dt className="text-muted-foreground text-xs uppercase">{label}</dt>
+                </div>
+              ))}
             </dl>
-            <div className="mt-4 space-y-3">
-              <Info label={t('review.bio')} value={p.bio} changed={changed('Bio')} />
-              <Info
-                label={t('review.photos')}
-                changed={changed('Photo')}
-                value={
-                  <div className="mt-1 flex flex-wrap gap-2">
-                    {Array.from({ length: p.galleryCount }, (_, i) => (
-                      <div
-                        key={i}
-                        className="bg-muted text-muted-foreground flex size-20 items-center justify-center rounded-md text-xs"
-                      >
-                        {t('review.photo', { n: i + 1 })}
-                      </div>
-                    ))}
-                  </div>
-                }
-              />
+
+            <div>
+              <h3 className="font-heading mb-2 font-bold uppercase">
+                {t(p.role === 'trainer' ? 'review.coachingFocus' : 'review.playingFocus')}
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {[t(`sportNames.${p.sport}`), p.specialization, ...p.certificates.map((c) => c.name)].map((tag) => (
+                  <span key={tag} className="bg-primary/10 text-primary rounded-md px-2.5 py-1 text-sm font-medium">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="font-heading mb-1 font-bold uppercase">
+                {t('review.bio')}
+                {changed('Bio') && (
+                  <span className="ms-2 text-xs font-medium text-amber-700 normal-case dark:text-amber-300">
+                    {t('profiles.changed')}
+                  </span>
+                )}
+              </h3>
+              <p className="text-sm">{p.bio}</p>
+              {p.approach && (
+                <p className="text-muted-foreground mt-2 text-sm">
+                  {t('review.approach')}: {p.approach}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <div className="mb-2 flex items-baseline justify-between">
+                <h3 className="font-heading font-bold uppercase">
+                  {t('review.onThePitch')}
+                  {changed('Photo') && (
+                    <span className="ms-2 text-xs font-medium text-amber-700 normal-case dark:text-amber-300">
+                      {t('profiles.changed')}
+                    </span>
+                  )}
+                </h3>
+                <span className="text-primary text-sm font-medium">
+                  {t('review.photoCount', { count: p.galleryCount })}
+                </span>
+              </div>
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                {Array.from({ length: p.galleryCount }, (_, i) => (
+                  <img
+                    key={i}
+                    src={galleryImages[i % galleryImages.length]}
+                    alt={t('review.photo', { n: i + 1 })}
+                    className="aspect-[4/3] w-full rounded-2xl object-cover"
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="border-t pt-4">
+              <h3 className="font-heading mb-2 text-sm font-bold uppercase">{t('review.adminDetails')}</h3>
+              <dl className="grid grid-cols-2 gap-2 md:grid-cols-3">
+                <Info label={t('review.dob')} value={p.dob ? `${formatDate(p.dob, i18n.language)} (${p.age})` : p.age} />
+                <Info label={t('review.gender')} value={t(`review.genders.${p.gender}`)} />
+                <Info label={t('col.location')} value={p.location} />
+                <Info label={t('review.submitted')} value={formatDate(p.submittedAt, i18n.language)} />
+                {p.role === 'player' && <Info label={t('review.weight')} value={`${p.weightKg} kg`} />}
+                {p.role === 'player' && <Info label={t('review.height')} value={`${p.heightCm} cm`} />}
+                <Info label={t('review.views')} value={p.views.toLocaleString(i18n.language)} />
+                <Info label={t('review.contactConsent')} value={p.contactConsent ? t('common.yes') : t('common.no')} />
+                <Info label={t('review.phone')} value={p.phone} />
+                <Info label={t('review.email')} value={p.email} />
+              </dl>
             </div>
           </CardContent>
         </Card>

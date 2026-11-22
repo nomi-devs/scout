@@ -43,7 +43,9 @@
     "notifications": "الإشعارات",
     "settings": "إعدادات التطبيق",
     "admins": "المشرفون",
-    "audit": "سجل التدقيق"
+    "audit": "سجل التدقيق",
+    "nationalities": "الجنسيات",
+    "specializations": "تخصصات التدريب"
   },
   "login": {
     "title": "مرحبًا بعودتك",
@@ -87,7 +89,9 @@
     "required": "مطلوب",
     "bilingualHint": "الإنجليزية والعربية كلتاهما مطلوبتان.",
     "moveUp": "تحريك للأعلى",
-    "moveDown": "تحريك للأسفل"
+    "moveDown": "تحريك للأسفل",
+    "view": "عرض",
+    "previewHint": "كما يظهر في التطبيق."
   },
   "status": {
     "active": "نشط",
@@ -149,7 +153,8 @@
     "validity": "الصلاحية",
     "coupon": "القسيمة",
     "appliesTo": "تنطبق على",
-    "duration": "المدة"
+    "duration": "المدة",
+    "experience": "الخبرة"
   },
   "f": {
     "name": "الاسم",
@@ -184,7 +189,6 @@
     "discountType": "نوع الخصم",
     "discountValue": "قيمة الخصم",
     "appliesTo": "تنطبق على",
-    "startsAt": "تبدأ في",
     "icon": "أيقونة أو صورة"
   },
   "profileStatus": {
@@ -206,7 +210,8 @@
       "rejected": "مرفوض",
       "hidden": "مخفي",
       "all": "الكل"
-    }
+    },
+    "yearsShort": "{{n}} سنة"
   },
   "review": {
     "gender": "الجنس",
@@ -253,7 +258,18 @@
     "dob": "تاريخ الميلاد (العمر)",
     "views": "المشاهدات العامة",
     "subscription": "الاشتراك",
-    "noSubscription": "لا يوجد اشتراك بعد. يشترك المستخدم بعد الموافقة."
+    "noSubscription": "لا يوجد اشتراك بعد. يشترك المستخدم بعد الموافقة.",
+    "coachingFocus": "مجال التدريب",
+    "playingFocus": "مجال اللعب",
+    "approach": "أسلوبي",
+    "yearsOld": "سنة",
+    "experience": "الخبرة",
+    "yearsValue": "{{n}} سنة",
+    "onThePitch": "في الملعب",
+    "adminDetails": "بيانات الحساب",
+    "sportTrainer": "مدرب {{sport}}",
+    "sportPlayer": "لاعب {{sport}}",
+    "photoCount": "{{count}} صور"
   },
   "reports": {
     "description": "البلاغات المفتوحة أولًا، والأقدم في الأعلى.",
@@ -387,7 +403,8 @@
   },
   "onboarding": {
     "description": "الشرائح المعروضة قبل التسجيل. الترتيب يحدد التسلسل.",
-    "add": "إضافة شريحة"
+    "add": "إضافة شريحة",
+    "getStarted": "ابدأ الآن"
   },
   "banners": {
     "description": "اللافتات الإعلانية في الشاشة الرئيسية مع المشاهدات والنقرات.",
@@ -406,9 +423,7 @@
     "description": "القوائم المستخدمة في نماذج الملفات والفلاتر وأسباب الرفض والبلاغات.",
     "add": "إضافة عنصر",
     "types": {
-      "nationalities": "الجنسيات",
       "locations": "المواقع",
-      "trainerSpecializations": "تخصصات المدربين",
       "playerSpecializations": "تخصصات اللاعبين",
       "rejectionReasons": "أسباب الرفض",
       "reportReasons": "أسباب البلاغات"
@@ -468,7 +483,8 @@
     "emailAvailability": "نص توفر البريد",
     "phone": "الهاتف / واتساب",
     "phoneAvailability": "نص توفر الهاتف",
-    "methods": "يدفع المستخدمون عبر KNET أو Apple Pay أو Visa أو MasterCard."
+    "methods": "يدفع المستخدمون عبر KNET أو Apple Pay أو Visa أو MasterCard.",
+    "reelRules": "يمكن لكل مستخدم رفع حتى {{perMonth}} ريل في الشهر، ومدة كل ريل حتى دقيقتين."
   },
   "admins": {
     "description": "حسابات المسؤولين وأدوارهم.",
@@ -495,7 +511,23 @@
     "allTypes": "كل الأنواع",
     "allMethods": "كل طرق الدفع",
     "allAreas": "كل الأقسام",
-    "allLists": "كل القوائم"
+    "allLists": "كل القوائم",
+    "allNationalities": "كل الجنسيات",
+    "allSpecializations": "كل التخصصات",
+    "allAges": "كل الأعمار",
+    "allExperience": "أي خبرة",
+    "age": {
+      "u18": "أقل من 18",
+      "18-25": "18 – 25",
+      "26-35": "26 – 35",
+      "36+": "36 فأكثر"
+    },
+    "exp": {
+      "0-2": "0 – 2 سنة",
+      "3-5": "3 – 5 سنوات",
+      "6-10": "6 – 10 سنوات",
+      "10+": "أكثر من 10 سنوات"
+    }
   },
   "reels": {
     "description": "مقاطع الفيديو التي يرفعها المستخدمون من إنشاء مقطع. راجع كل مقطع قبل نشره.",
@@ -531,6 +563,28 @@
       "quality": "جودة الفيديو ضعيفة",
       "misleading": "معلومات مضللة",
       "notSports": "لا علاقة له بالرياضة"
-    }
+    },
+    "thisMonth": "المرفوع هذا الشهر",
+    "noExpiry": "تتم مراجعة الريلز قبل ظهورها. بعد الموافقة يبقى الريل في التطبيق دون تاريخ انتهاء."
+  },
+  "nationalities": {
+    "description": "الخيارات في حقل الجنسية بنموذج الملف الشخصي.",
+    "add": "إضافة جنسية"
+  },
+  "specializations": {
+    "description": "الخيارات في حقل تخصص التدريب بنموذج ملف المدرب.",
+    "add": "إضافة تخصص"
+  },
+  "rich": {
+    "bold": "غامق",
+    "italic": "مائل",
+    "underline": "تسطير",
+    "heading": "عنوان",
+    "bulletList": "قائمة نقطية",
+    "orderedList": "قائمة مرقمة",
+    "link": "رابط",
+    "undo": "تراجع",
+    "redo": "إعادة",
+    "linkPrompt": "عنوان الرابط (اتركه فارغاً للإزالة)"
   }
 }

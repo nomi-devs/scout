@@ -23,6 +23,8 @@ export interface Column<T> {
   header: string
   cell: (row: T) => ReactNode
   className?: string
+  /** Keep this column pinned to the end edge so it stays visible when the table scrolls sideways (phones). */
+  sticky?: boolean
   /** Value to sort by. Columns without it are not sortable. */
   sort?: (row: T) => string | number
 }
@@ -191,7 +193,7 @@ export function DataTable<T>({
                   return (
                     <TableHead
                       key={c.key}
-                      className={cn('text-xs font-semibold tracking-wide uppercase', c.className)}
+                      className={cn('text-xs font-semibold tracking-wide uppercase', c.className, c.sticky && 'bg-secondary sticky end-0')}
                       aria-sort={dir === 'asc' ? 'ascending' : dir === 'desc' ? 'descending' : undefined}
                     >
                       {c.sort ? (
@@ -235,7 +237,7 @@ export function DataTable<T>({
                   className={cn(onRowClick && 'hover:bg-secondary/50 cursor-pointer', rowClassName?.(row))}
                 >
                   {columns.map((c) => (
-                    <TableCell key={c.key} className={c.className}>
+                    <TableCell key={c.key} className={cn(c.className, c.sticky && 'bg-card sticky end-0')}>
                       {c.cell(row)}
                     </TableCell>
                   ))}

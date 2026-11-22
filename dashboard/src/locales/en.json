@@ -43,7 +43,9 @@
     "notifications": "Notifications",
     "settings": "App settings",
     "admins": "Admin users",
-    "audit": "Audit log"
+    "audit": "Audit log",
+    "nationalities": "Nationalities",
+    "specializations": "Coaching specializations"
   },
   "login": {
     "title": "Welcome back",
@@ -87,7 +89,9 @@
     "required": "Required",
     "bilingualHint": "English and Arabic are both required.",
     "moveUp": "Move up",
-    "moveDown": "Move down"
+    "moveDown": "Move down",
+    "view": "View",
+    "previewHint": "How this looks in the app."
   },
   "status": {
     "active": "Active",
@@ -149,7 +153,8 @@
     "validity": "Validity",
     "coupon": "Coupon",
     "appliesTo": "Applies to",
-    "duration": "Length"
+    "duration": "Length",
+    "experience": "Experience"
   },
   "f": {
     "name": "Name",
@@ -184,7 +189,6 @@
     "discountType": "Discount type",
     "discountValue": "Discount value",
     "appliesTo": "Applies to",
-    "startsAt": "Starts on",
     "icon": "Icon or image"
   },
   "profileStatus": {
@@ -206,7 +210,8 @@
       "rejected": "Rejected",
       "hidden": "Hidden",
       "all": "All"
-    }
+    },
+    "yearsShort": "{{n}} yrs"
   },
   "review": {
     "gender": "Gender",
@@ -253,7 +258,18 @@
     "dob": "Date of birth (age)",
     "views": "Public views",
     "subscription": "Subscription",
-    "noSubscription": "No subscription yet. The user subscribes after approval."
+    "noSubscription": "No subscription yet. The user subscribes after approval.",
+    "coachingFocus": "Coaching focus",
+    "playingFocus": "Playing focus",
+    "approach": "My approach",
+    "yearsOld": "Years old",
+    "experience": "Experience",
+    "yearsValue": "{{n}} years",
+    "onThePitch": "On the pitch",
+    "adminDetails": "Account details",
+    "sportTrainer": "{{sport}} trainer",
+    "sportPlayer": "{{sport}} player",
+    "photoCount": "{{count}} photos"
   },
   "reports": {
     "description": "Open reports first, oldest on top.",
@@ -387,7 +403,8 @@
   },
   "onboarding": {
     "description": "Slides shown before sign-up. Order decides the sequence.",
-    "add": "Add slide"
+    "add": "Add slide",
+    "getStarted": "Get Started"
   },
   "banners": {
     "description": "Sponsored banners on the Home screen, with views and taps.",
@@ -406,9 +423,7 @@
     "description": "Pick-lists used by profile forms, filters, rejections and reports.",
     "add": "Add item",
     "types": {
-      "nationalities": "Nationalities",
       "locations": "Locations",
-      "trainerSpecializations": "Trainer specializations",
       "playerSpecializations": "Player specializations",
       "rejectionReasons": "Rejection reasons",
       "reportReasons": "Report reasons"
@@ -468,7 +483,8 @@
     "emailAvailability": "Email availability text",
     "phone": "Phone / WhatsApp",
     "phoneAvailability": "Phone availability text",
-    "methods": "Users pay with KNET, Apple Pay, Visa or MasterCard."
+    "methods": "Users pay with KNET, Apple Pay, Visa or MasterCard.",
+    "reelRules": "Each user can upload up to {{perMonth}} reels a month. Each reel can be up to {{minutes}} minutes long."
   },
   "admins": {
     "description": "Admin accounts and their roles.",
@@ -495,7 +511,23 @@
     "allTypes": "All types",
     "allMethods": "All methods",
     "allAreas": "All areas",
-    "allLists": "All lists"
+    "allLists": "All lists",
+    "allNationalities": "All nationalities",
+    "allSpecializations": "All specializations",
+    "allAges": "All ages",
+    "allExperience": "Any experience",
+    "age": {
+      "u18": "Under 18",
+      "18-25": "18 – 25",
+      "26-35": "26 – 35",
+      "36+": "36 and over"
+    },
+    "exp": {
+      "0-2": "0 – 2 years",
+      "3-5": "3 – 5 years",
+      "6-10": "6 – 10 years",
+      "10+": "Over 10 years"
+    }
   },
   "reels": {
     "description": "Videos users upload from Create Reel. Review each one before it is published.",
@@ -531,6 +563,28 @@
       "quality": "Poor video quality",
       "misleading": "Misleading information",
       "notSports": "Not sports related"
-    }
+    },
+    "thisMonth": "Uploads this month",
+    "noExpiry": "Reels are reviewed before they appear. Once approved, a reel stays in the app with no expiry date."
+  },
+  "nationalities": {
+    "description": "Options in the Nationality field of the profile form.",
+    "add": "Add nationality"
+  },
+  "specializations": {
+    "description": "Options in the Coaching specialization field of the trainer profile form.",
+    "add": "Add specialization"
+  },
+  "rich": {
+    "bold": "Bold",
+    "italic": "Italic",
+    "underline": "Underline",
+    "heading": "Heading",
+    "bulletList": "Bullet list",
+    "orderedList": "Numbered list",
+    "link": "Link",
+    "undo": "Undo",
+    "redo": "Redo",
+    "linkPrompt": "Link address (leave empty to remove)"
   }
 }

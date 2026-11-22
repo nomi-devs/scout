@@ -1,10 +1,11 @@
-import { ArrowDown, ArrowUp, ImageIcon, Pencil, Plus, Trash2 } from 'lucide-react'
+import { ArrowDown, ArrowUp, Eye, ImageIcon, Pencil, Plus, Trash2 } from 'lucide-react'
 import { useState, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 
 import { DataTable, type Column, type TableFilter } from '@/components/data-table'
 import { PageHeader } from '@/components/page-header'
+import { isRichTextEmpty, RichTextEditor } from '@/components/rich-text-editor'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -27,7 +28,7 @@ export interface Field {
   key: string
   /** Translation key for the label. */
   label: string
-  type: 'text' | 'textarea' | 'number' | 'select' | 'checkbox' | 'bilingual' | 'bilingualArea' | 'date' | 'image'
+  type: 'text' | 'textarea' | 'number' | 'select' | 'checkbox' | 'bilingual' | 'bilingualArea' | 'bilingualRich' | 'date' | 'image'
   options?: { value: string; label: string }[]
   required?: boolean
 }
@@ -55,6 +56,8 @@ export interface CrudConfig {
   canDelete?: boolean
   /** Numeric field that sets the display order in the app. Adds move up / down buttons. */
   orderKey?: string
+  /** When set, adds a view (eye) button that opens this read-only preview of the row. */
+  preview?: (row: Row, lang: string) => ReactNode
   header?: ReactNode
   /** Extra toolbar buttons next to "Add". */
   extra?: ReactNode
@@ -69,6 +72,7 @@ export function CrudPage({ config }: { config: CrudConfig }) {
   const [isNew, setIsNew] = useState(false)
   const [errors, setErrors] = useState<Record<string, boolean>>({})
   const [deleting, setDeleting] = useState<Row | null>(null)
+  const [viewing, setViewing] = useState<Row | null>(null)
 
   const { orderKey } = config
   const ordered = orderKey ? [...rows].sort((a, b) => Number(a[orderKey]) - Number(b[orderKey])) : rows
@@ -115,9 +119,11 @@ export function CrudPage({ config }: { config: CrudConfig }) {
     if (!editing) return
     const missing: Record<string, boolean> = {}
     for (const f of config.fields) {
-      if (f.type === 'bilingual' || f.type === 'bilingualArea') {
-        if (!String(editing[`${f.key}En`] ?? '').trim()) missing[`${f.key}En`] = true
-        if (!String(editing[`${f.key}Ar`] ?? '').trim()) missing[`${f.key}Ar`] = true
+      if (f.type === 'bilingual' || f.type === 'bilingualArea' || f.type === 'bilingualRich') {
+        for (const k of [`${f.key}En`, `${f.key}Ar`]) {
+          const v = String(editing[k] ?? '')
+          if (f.type === 'bilingualRich' ? isRichTextEmpty(v) : !v.trim()) missing[k] = true
+        }
       } else if (
         f.required !== false &&
         f.type !== 'checkbox' &&
@@ -162,7 +168,8 @@ export function CrudPage({ config }: { config: CrudConfig }) {
   columns.push({
     key: 'actions',
     header: '',
-    className: 'w-24 text-end',
+    className: 'w-px whitespace-nowrap text-end',
+    sticky: true,
     cell: (row) => (
       <div className="flex justify-end gap-1">
         {orderKey && (
@@ -186,6 +193,11 @@ export function CrudPage({ config }: { config: CrudConfig }) {
               <ArrowDown />
             </Button>
           </>
+        )}
+        {config.preview && (
+          <Button size="icon-sm" variant="ghost" aria-label={t('common.view')} onClick={() => setViewing(row)}>
+            <Eye />
+          </Button>
         )}
         <Button size="icon-sm" variant="ghost" aria-label={t('common.edit')} onClick={() => startEdit(row)}>
           <Pencil />
@@ -224,7 +236,9 @@ export function CrudPage({ config }: { config: CrudConfig }) {
       />
 
       <Dialog open={!!editing} onOpenChange={(open) => !open && setEditing(null)}>
-        <DialogContent className="max-h-[90vh] overflow-y-auto">
+        <DialogContent
+          className={`max-h-[90vh] overflow-y-auto ${config.fields.some((f) => f.type === 'bilingualRich') ? 'sm:max-w-3xl' : ''}`}
+        >
           <DialogHeader>
             <DialogTitle>{isNew ? config.addLabel : t('common.edit')}</DialogTitle>
             <DialogDescription>{t('common.bilingualHint')}</DialogDescription>
@@ -254,6 +268,16 @@ export function CrudPage({ config }: { config: CrudConfig }) {
               </DialogFooter>
             </form>
           )}
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={!!viewing} onOpenChange={(open) => !open && setViewing(null)}>
+        <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-xl">
+          <DialogHeader>
+            <DialogTitle>{viewing ? config.rowName(viewing) : ''}</DialogTitle>
+            <DialogDescription>{t('common.previewHint')}</DialogDescription>
+          </DialogHeader>
+          {viewing && config.preview?.(viewing, i18n.language)}
         </DialogContent>
       </Dialog>
 
@@ -308,6 +332,28 @@ function FieldInput({
                 value={String(row[k] ?? '')}
                 aria-invalid={errors[k] || undefined}
                 onChange={(e) => onChange({ [k]: e.target.value })}
+              />
+              {err(k)}
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
+  if (field.type === 'bilingualRich') {
+    return (
+      <div className="space-y-2">
+        <Label>{label}</Label>
+        {(['En', 'Ar'] as const).map((suffix) => {
+          const k = `${field.key}${suffix}`
+          return (
+            <div key={k} className="space-y-1">
+              <RichTextEditor
+                label={`${label} (${suffix === 'En' ? 'EN' : 'AR'})`}
+                dir={suffix === 'Ar' ? 'rtl' : 'ltr'}
+                value={String(row[k] ?? '')}
+                invalid={errors[k]}
+                onChange={(html) => onChange({ [k]: html })}
               />
               {err(k)}
             </div>
@@ -389,7 +435,7 @@ function FieldInput({
 
 /** Small preview of an uploaded image. Seed data only has file names, so those show a placeholder. */
 export function ImagePreview({ url, className = 'size-10' }: { url: string; className?: string }) {
-  const real = url.startsWith('blob:') || url.startsWith('http') || url.startsWith('data:')
+  const real = url.startsWith('blob:') || url.startsWith('http') || url.startsWith('data:') || url.startsWith('/')
   return real ? (
     <img src={url} alt="" className={`${className} rounded-md object-cover`} />
   ) : (

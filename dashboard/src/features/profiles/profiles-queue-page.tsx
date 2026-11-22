@@ -14,6 +14,24 @@ import { isPending, ProfileStatusBadge } from './profile-status'
 
 const sports = ['football', 'basketball', 'volleyball', 'tennis', 'cricket']
 
+/** Age and experience are filtered in bands, as in the app's filter sheet. */
+const ageBands = [
+  { key: 'u18', test: (n: number) => n < 18 },
+  { key: '18-25', test: (n: number) => n >= 18 && n <= 25 },
+  { key: '26-35', test: (n: number) => n >= 26 && n <= 35 },
+  { key: '36+', test: (n: number) => n >= 36 },
+]
+const expBands = [
+  { key: '0-2', test: (n: number) => n <= 2 },
+  { key: '3-5', test: (n: number) => n >= 3 && n <= 5 },
+  { key: '6-10', test: (n: number) => n >= 6 && n <= 10 },
+  { key: '10+', test: (n: number) => n > 10 },
+]
+const bandOf = (bands: typeof ageBands, n: number) => bands.find((b) => b.test(n))?.key ?? ''
+
+const unique = (values: string[]) =>
+  [...new Set(values)].sort().map((v) => ({ value: v, label: v }))
+
 type Filter = 'pending' | 'approved' | 'rejected' | 'hidden' | 'all'
 
 const matches = (filter: Filter, p: ProfileRec) =>
@@ -29,8 +47,9 @@ export function ProfilesQueuePage({ role }: { role: ProfileRole }) {
   const { profiles } = useMockStore()
   const [filter, setFilter] = useState<Filter>('pending')
 
-  const rows = profiles
-    .filter((p) => p.role === role && matches(filter, p))
+  const roleProfiles = profiles.filter((p) => p.role === role)
+  const rows = roleProfiles
+    .filter((p) => matches(filter, p))
     .sort((a, b) => a.submittedAt - b.submittedAt)
 
   const columns: Column<ProfileRec>[] = [
@@ -38,10 +57,17 @@ export function ProfilesQueuePage({ role }: { role: ProfileRole }) {
       key: 'name',
       header: t('col.name'),
       sort: (p) => p.name,
-      cell: (p) => <span className="font-medium">{p.name}</span>,
+      cell: (p) => (
+        <div>
+          <span className="font-medium">{p.name}</span>
+          <span className="text-muted-foreground block text-xs">{p.nationality}</span>
+        </div>
+      ),
     },
     { key: 'sport', header: t('col.sport'), sort: (p) => p.sport, cell: (p) => t(`sportNames.${p.sport}`) },
     { key: 'spec', header: t('col.specialization'), cell: (p) => p.specialization },
+    { key: 'age', header: t('col.age'), sort: (p) => p.age, cell: (p) => p.age },
+    { key: 'exp', header: t('col.experience'), sort: (p) => p.years, cell: (p) => t('profiles.yearsShort', { n: p.years }) },
     { key: 'loc', header: t('col.location'), sort: (p) => p.city, cell: (p) => p.city },
     {
       key: 'submitted',
@@ -78,7 +104,7 @@ export function ProfilesQueuePage({ role }: { role: ProfileRole }) {
         columns={columns}
         rows={rows}
         getKey={(p) => p.id}
-        searchText={(p) => `${p.name} ${p.specialization} ${p.city}`}
+        searchText={(p) => `${p.name} ${p.specialization} ${p.city} ${p.nationality}`}
         onRowClick={(p) => navigate(`/${role}s/${p.id}`)}
         filters={[
           {
@@ -88,9 +114,33 @@ export function ProfilesQueuePage({ role }: { role: ProfileRole }) {
             value: (p) => p.sport,
           },
           {
+            key: 'nationality',
+            label: t('filters.allNationalities'),
+            options: unique(roleProfiles.map((p) => p.nationality)),
+            value: (p) => p.nationality,
+          },
+          {
+            key: 'specialization',
+            label: t('filters.allSpecializations'),
+            options: unique(roleProfiles.map((p) => p.specialization)),
+            value: (p) => p.specialization,
+          },
+          {
+            key: 'age',
+            label: t('filters.allAges'),
+            options: ageBands.map((b) => ({ value: b.key, label: t(`filters.age.${b.key}`) })),
+            value: (p) => bandOf(ageBands, p.age),
+          },
+          {
+            key: 'experience',
+            label: t('filters.allExperience'),
+            options: expBands.map((b) => ({ value: b.key, label: t(`filters.exp.${b.key}`) })),
+            value: (p) => bandOf(expBands, p.years),
+          },
+          {
             key: 'location',
             label: t('filters.allLocations'),
-            options: [...new Set(profiles.map((p) => p.location))].map((l) => ({ value: l, label: l })),
+            options: unique(roleProfiles.map((p) => p.location)),
             value: (p) => p.location,
           },
         ]}

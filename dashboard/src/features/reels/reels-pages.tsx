@@ -21,7 +21,7 @@ import { Label } from '@/components/ui/label'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Textarea } from '@/components/ui/textarea'
 import { formatDate, hoursSince } from '@/lib/format'
-import type { ReelRec, ReelStatus } from '@/mock/data'
+import { REEL_MAX_PER_MONTH, REEL_MAX_SECONDS, type ReelRec, type ReelStatus } from '@/mock/data'
 import { useMockStore } from '@/mock/store'
 
 const sports = ['football', 'basketball', 'volleyball', 'tennis', 'cricket']
@@ -85,7 +85,7 @@ export function ReelsPage() {
 
   return (
     <section>
-      <PageHeader title={t('nav.reels')} description={t('reels.description')} />
+      <PageHeader title={t('nav.reels')} description={`${t('reels.description')} ${t('reels.noExpiry')}`} />
       <DataTable
         columns={columns}
         rows={rows}
@@ -156,6 +156,12 @@ export function ReelDetailPage() {
   }
 
   const pending = r.status === 'pending'
+  const now = new Date()
+  const sameMonth = (ms: number) => {
+    const d = new Date(ms)
+    return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth()
+  }
+  const uploadedThisMonth = reels.filter((x) => x.profileId === r.profileId && sameMonth(x.submittedAt)).length
 
   return (
     <section>
@@ -256,6 +262,18 @@ export function ReelDetailPage() {
               <div>
                 <dt className="text-muted-foreground text-xs">{t('col.views')}</dt>
                 <dd className="font-medium">{views(r.views)}</dd>
+              </div>
+              <div>
+                <dt className="text-muted-foreground text-xs">{t('col.duration')}</dt>
+                <dd className={`font-medium ${r.durationSec > REEL_MAX_SECONDS ? 'text-destructive' : ''}`}>
+                  {duration(r.durationSec)} / {duration(REEL_MAX_SECONDS)}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-muted-foreground text-xs">{t('reels.thisMonth')}</dt>
+                <dd className="font-medium">
+                  {uploadedThisMonth} / {REEL_MAX_PER_MONTH}
+                </dd>
               </div>
             </dl>
             <Button asChild variant="outline" size="sm" className="mt-4">

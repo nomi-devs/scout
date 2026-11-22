@@ -89,6 +89,16 @@ describe('clickable dashboard', () => {
     await waitFor(async () => expect((await rows())[1]).toContain('Basketball'))
   })
 
+  it('lists nationalities and coaching specializations as their own managed lists', async () => {
+    const first = renderApp({ path: '/nationalities', session: superAdmin })
+    expect(await screen.findByText('Kuwaiti')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Add nationality' })).toBeInTheDocument()
+    first.unmount()
+    renderApp({ path: '/specializations', session: superAdmin })
+    expect(await screen.findByText('Youth development')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Add specialization' })).toBeInTheDocument()
+  })
+
   it('shows the overview statistics from the SRS', async () => {
     renderApp({ path: '/', session: superAdmin })
     for (const label of [

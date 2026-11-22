@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { REEL_MAX_PER_MONTH, REEL_MAX_SECONDS } from '@/mock/data'
 import { useMockStore } from '@/mock/store'
 
 type TextKey = 'supportEmail' | 'emailAvailability' | 'phone' | 'phoneAvailability' | 'minIos' | 'minAndroid'
@@ -75,6 +76,9 @@ export function SettingsPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             {flag('reelsEnabled', t('settings.reelsEnabled'))}
+            <p className="text-muted-foreground text-xs">
+              {t('settings.reelRules', { perMonth: REEL_MAX_PER_MONTH, minutes: REEL_MAX_SECONDS / 60 })}
+            </p>
             {flag('guestBrowsing', t('settings.guestBrowsing'))}
             {text('minIos', t('settings.minIos'))}
             {text('minAndroid', t('settings.minAndroid'))}

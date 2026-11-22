@@ -27,6 +27,8 @@ export interface ProfileRec {
   weightKg?: number
   heightCm?: number
   bio: string
+  /** Trainers only: the "My approach" line shown under the bio in the app. */
+  approach?: string
   galleryCount: number
   certificates: { name: string; status: CertStatus }[]
   status: ProfileStatus
@@ -408,7 +410,10 @@ function generateProfiles(count: number): ProfileRec[] {
 }
 
 initialProfiles.push(...generateProfiles(130))
-for (const p of initialProfiles) p.dob = NOW - p.age * 365.25 * D - ((p.userId.length * 37) % 300) * D
+for (const p of initialProfiles) {
+  p.dob = NOW - p.age * 365.25 * D - ((p.userId.length * 37) % 300) * D
+  if (p.role === 'trainer') p.approach = 'Strong fundamentals, individual attention and a genuine love of the game.'
+}
 
 export interface UserRec {
   id: string
@@ -690,6 +695,10 @@ const reelTitles = [
 ]
 const reelPlaces = ['Dubai, United Arab Emirates', 'Kuwait', 'Doha, Qatar', 'Riyadh, Saudi Arabia']
 
+/** App rules for reels: a user can upload 35 a month, each up to 2 minutes, and approved reels never expire. */
+export const REEL_MAX_PER_MONTH = 35
+export const REEL_MAX_SECONDS = 120
+
 export const initialReels: ReelRec[] = [
   {
     id: 'rl1',
@@ -763,7 +772,7 @@ initialReels.push(
       title: pick(reelTitles),
       location: pick(reelPlaces),
       description: 'Work in progress. Always improving on and off the pitch.',
-      durationSec: 20 + Math.floor(rand() * 240),
+      durationSec: 20 + Math.floor(rand() * 100),
       submittedAt: status === 'pending' ? hoursAgo(1 + Math.floor(rand() * 60)) : daysAgo(1 + Math.floor(rand() * 60)),
       status,
       views: status === 'approved' ? Math.floor(rand() * 200_000) : 0,
